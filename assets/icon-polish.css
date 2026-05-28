@@ -1,0 +1,68 @@
+html {
+  background: #eef3f8;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: radial-gradient(circle at 50% -12%, #f8fbff 0, #eef3f8 42%, #e9eef5 100%);
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+.hems-line-icon {
+  width: 1.18em;
+  height: 1.18em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.2em;
+  flex: 0 0 auto;
+  color: currentColor;
+}
+
+.hems-line-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+button .hems-line-icon,
+[style*="font-size: 18px"] .hems-line-icon,
+[style*="font-size:18px"] .hems-line-icon {
+  width: 1.28em;
+  height: 1.28em;
+}
+
+[style*="font-size: 22px"] .hems-line-icon,
+[style*="font-size:22px"] .hems-line-icon,
+[style*="font-size: 28px"] .hems-line-icon,
+[style*="font-size:28px"] .hems-line-icon,
+[style*="font-size: 32px"] .hems-line-icon,
+[style*="font-size:32px"] .hems-line-icon,
+[style*="font-size: 40px"] .hems-line-icon,
+[style*="font-size:40px"] .hems-line-icon {
+  width: 1em;
+  height: 1em;
+}
+
+#root > div {
+  box-shadow: 0 20px 60px rgba(24, 39, 75, 0.08);
+}
