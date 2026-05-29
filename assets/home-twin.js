@@ -1,5 +1,7 @@
 (function () {
   const storageKey = "hems.twin.rooms.v1";
+  const deviceStorageKey = "hems.devices.v1";
+  const hadStoredRooms = Boolean(window.localStorage.getItem(storageKey));
   const palette = ["#0a84ff", "#34a853", "#ff9f0a", "#8e5cf7", "#00a889", "#ff6b6b"];
   const defaultRooms = [
     {
@@ -75,8 +77,11 @@
   ];
 
   let rooms = loadRooms();
+  let devices = loadDevices();
   let selectedId = rooms[0] ? rooms[0].id : "";
   let scheduled = false;
+  migrateStoredRoomDevices();
+  syncRoomsWithDevices();
 
   function cloneRooms(source) {
     return JSON.parse(JSON.stringify(source));
@@ -94,6 +99,36 @@
     window.localStorage.setItem(storageKey, JSON.stringify(rooms));
   }
 
+  function defaultDevices() {
+    return defaultRooms.flatMap((room, roomIndex) =>
+      room.devices.map((name, deviceIndex) => makeDevice(name, room.name, roomIndex * 10 + deviceIndex))
+    );
+  }
+
+  function loadDevices() {
+    try {
+      const parsed = JSON.parse(window.localStorage.getItem(deviceStorageKey) || "null");
+      if (Array.isArray(parsed)) return parsed.map(normalizeDevice);
+    } catch {}
+    return [];
+  }
+
+  function saveDevices(nextDevices = devices, notify = true) {
+    devices = nextDevices.map(normalizeDevice);
+    window.localStorage.setItem(deviceStorageKey, JSON.stringify(devices));
+    if (notify) {
+      window.dispatchEvent(new CustomEvent("hems-devices-change", { detail: devices }));
+    }
+  }
+
+  function migrateStoredRoomDevices() {
+    if (devices.length || !hadStoredRooms) return;
+    const migrated = rooms.flatMap((room, roomIndex) =>
+      room.devices.map((name, deviceIndex) => makeDevice(name, room.name, roomIndex * 10 + deviceIndex))
+    );
+    if (migrated.length) saveDevices(migrated);
+  }
+
   function normalizeRoom(room, index = 0) {
     return {
       id: String(room.id || `room_${Date.now()}_${index}`),
@@ -107,6 +142,82 @@
       advice: String(room.advice || "可继续绑定设备并观察负载变化，AI 将根据房间状态生成节能建议。"),
       actions: Array.isArray(room.actions) && room.actions.length ? room.actions.map(String) : ["查看设备", "节能建议"]
     };
+  }
+
+  function normalizeDevice(device, index = 0) {
+    const name = String(device.name || device.label || "未命名设备");
+    const room = String(device.room || "未分配");
+    return {
+      id: String(device.id || `dev_twin_${Date.now()}_${index}`),
+      name,
+      room,
+      type: device.type || inferDeviceType(name),
+      icon: device.icon || inferDeviceIcon(name),
+      matterType: device.matterType || "0x0055",
+      matterCluster: device.matterCluster || "0x0055",
+      rated: Number(device.rated || 100),
+      variable: Boolean(device.variable),
+      shiftable: Boolean(device.shiftable),
+      chargeable: Boolean(device.chargeable),
+      strategy: device.strategy || "—",
+      cycleMins: Number(device.cycleMins || 0),
+      on: Boolean(device.on),
+      power: Number(device.power || 0),
+      shifted: Boolean(device.shifted),
+      shiftTo: device.shiftTo ?? null,
+      brightness: Number(device.brightness || 0)
+    };
+  }
+
+  function inferDeviceType(name) {
+    if (name.includes("空调")) return "ac";
+    if (name.includes("灯") || name.includes("照明")) return "light";
+    if (name.includes("冰箱")) return "fridge";
+    if (name.includes("洗衣")) return "washer";
+    if (name.includes("洗碗")) return "dishwasher";
+    if (name.includes("净化")) return "airpurifier";
+    return "custom";
+  }
+
+  function inferDeviceIcon(name) {
+    if (name.includes("空调")) return "❄️";
+    if (name.includes("灯") || name.includes("照明")) return "💡";
+    if (name.includes("冰箱")) return "🧊";
+    if (name.includes("洗衣")) return "🌀";
+    if (name.includes("洗碗")) return "🍽️";
+    if (name.includes("净化")) return "💨";
+    if (name.includes("电视")) return "📺";
+    return "🔌";
+  }
+
+  function makeDevice(name, roomName, index = 0) {
+    return normalizeDevice({
+      id: `dev_twin_${Date.now()}_${index}_${Math.random().toString(36).slice(2, 6)}`,
+      name,
+      room: roomName,
+      icon: inferDeviceIcon(name),
+      type: inferDeviceType(name)
+    }, index);
+  }
+
+  function devicesForRoom(roomName) {
+    return devices.filter((device) => device.room === roomName);
+  }
+
+  function syncRoomsWithDevices() {
+    let changed = false;
+    devices.forEach((device) => {
+      if (!device.room || rooms.some((room) => room.name === device.room)) return;
+      rooms.push(normalizeRoom({
+        id: `room_${Date.now()}_${rooms.length}`,
+        name: device.room,
+        color: palette[rooms.length % palette.length],
+        devices: []
+      }, rooms.length));
+      changed = true;
+    });
+    if (changed) saveRooms();
+    if (!roomById(selectedId) && rooms[0]) selectedId = rooms[0].id;
   }
 
   function autoGrid(index) {
@@ -145,6 +256,7 @@
   function template() {
     const selected = roomById(selectedId);
     if (!selected) return "";
+    const selectedDevices = devicesForRoom(selected.name);
 
     return `
       <div class="hems-twin__head">
@@ -196,14 +308,14 @@
           </div>
           <div class="hems-twin__metric">
             <div class="hems-twin__metric-label">设备数量</div>
-            <div class="hems-twin__metric-value">${selected.devices.length}</div>
+            <div class="hems-twin__metric-value">${selectedDevices.length}</div>
           </div>
         </div>
         <div class="hems-twin__section-title">房间电器</div>
         <div class="hems-twin__devices">
-          ${selected.devices.length ? selected.devices.map((device, index) => `
-            <button class="hems-twin__device" data-device-index="${index}" type="button" title="点击删除">
-              ${escapeHtml(device)} <span>×</span>
+          ${selectedDevices.length ? selectedDevices.map((device) => `
+            <button class="hems-twin__device" data-device-id="${escapeHtml(device.id)}" type="button" title="点击删除">
+              ${escapeHtml(device.name)} <span>×</span>
             </button>
           `).join("") : `<span class="hems-twin__empty">暂无电器</span>`}
         </div>
@@ -248,6 +360,8 @@
 
   function deleteSelectedRoom() {
     if (rooms.length <= 1) return;
+    const selected = roomById(selectedId);
+    if (selected) saveDevices(devices.filter((device) => device.room !== selected.name));
     rooms = rooms.filter((room) => room.id !== selectedId);
     selectedId = rooms[0].id;
     saveRooms();
@@ -258,21 +372,19 @@
     const room = roomById(selectedId);
     const trimmed = name.trim();
     if (!room || !trimmed) return;
-    if (!room.devices.includes(trimmed)) room.devices.push(trimmed);
-    saveRooms();
+    saveDevices([...devices, makeDevice(trimmed, room.name, devices.length)]);
+    syncRoomsWithDevices();
     renderTwin(true);
   }
 
-  function deleteDevice(index) {
-    const room = roomById(selectedId);
-    if (!room) return;
-    room.devices.splice(index, 1);
-    saveRooms();
+  function deleteDevice(id) {
+    saveDevices(devices.filter((device) => device.id !== id));
     renderTwin(true);
   }
 
   function resetRooms() {
     rooms = cloneRooms(defaultRooms);
+    saveDevices(defaultDevices());
     selectedId = rooms[0].id;
     saveRooms();
     renderTwin(true);
@@ -296,8 +408,8 @@
       addDevice(new FormData(event.currentTarget).get("deviceName") || "");
     });
 
-    twin.querySelectorAll("[data-device-index]").forEach((button) => {
-      button.addEventListener("click", () => deleteDevice(Number(button.getAttribute("data-device-index"))));
+    twin.querySelectorAll("[data-device-id]").forEach((button) => {
+      button.addEventListener("click", () => deleteDevice(button.getAttribute("data-device-id") || ""));
     });
 
     twin.querySelector('[data-twin-action="delete-room"]')?.addEventListener("click", deleteSelectedRoom);
@@ -316,7 +428,7 @@
     if (!app) return;
 
     const twin = existing || document.createElement("section");
-    const signature = JSON.stringify({ selectedId, rooms });
+    const signature = JSON.stringify({ selectedId, rooms, devices });
     if (!force && existing && twin.dataset.signature === signature) return;
 
     twin.className = "hems-twin";
@@ -349,6 +461,21 @@
 
   function start() {
     scheduleRender();
+    window.addEventListener("hems-devices-change", (event) => {
+      if (Array.isArray(event.detail)) {
+        devices = event.detail.map(normalizeDevice);
+      } else {
+        devices = loadDevices();
+      }
+      syncRoomsWithDevices();
+      renderTwin(true);
+    });
+    window.addEventListener("storage", (event) => {
+      if (event.key !== deviceStorageKey) return;
+      devices = loadDevices();
+      syncRoomsWithDevices();
+      renderTwin(true);
+    });
     const root = document.getElementById("root");
     if (!root) return;
     const observer = new MutationObserver(scheduleRender);
