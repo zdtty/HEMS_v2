@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-05-29T09:35:51.555Z",
+  "signals": {
+    "price": [
+      0.36,
+      0.34,
+      0.32,
+      0.31,
+      0.34,
+      0.42,
+      0.58,
+      0.78,
+      0.96,
+      1.12,
+      1.18,
+      1.05,
+      0.86,
+      0.72,
+      0.68,
+      0.76,
+      0.98,
+      1.26,
+      1.42,
+      1.36,
+      1.08,
+      0.78,
+      0.52,
+      0.4
+    ],
+    "carbon": [
+      520,
+      505,
+      490,
+      470,
+      445,
+      420,
+      390,
+      360,
+      330,
+      300,
+      285,
+      270,
+      260,
+      285,
+      320,
+      380,
+      455,
+      540,
+      620,
+      650,
+      610,
+      575,
+      550,
+      535
+    ],
+    "outdoorTemp": [
+      27,
+      26,
+      25,
+      25,
+      26,
+      28,
+      31,
+      34,
+      36,
+      38,
+      40,
+      40,
+      39,
+      38,
+      37,
+      36,
+      35,
+      34,
+      32,
+      31,
+      30,
+      29,
+      28,
+      27
+    ]
+  },
+  "results": [
+    {
+      "scenario": "Baseline",
+      "hvacKwh": 32.74,
+      "costCny": 25.34,
+      "carbonKg": 14.41,
+      "comfortRatePct": 86.9
+    },
+    {
+      "scenario": "Price-only",
+      "hvacKwh": 28.38,
+      "costCny": 18.26,
+      "carbonKg": 12.89,
+      "comfortRatePct": 90.6
+    },
+    {
+      "scenario": "Proposed",
+      "hvacKwh": 29.29,
+      "costCny": 21.41,
+      "carbonKg": 12.61,
+      "comfortRatePct": 86.9
+    }
+  ],
+  "optimizedShiftableSchedules": [
+    {
+      "deviceId": "washer",
+      "deviceName": "洗衣机",
+      "startHour": 3,
+      "durationHours": 1,
+      "score": 0.1598
+    },
+    {
+      "deviceId": "dishwasher",
+      "deviceName": "洗碗机",
+      "startHour": 3,
+      "durationHours": 1,
+      "score": 0.5751
+    },
+    {
+      "deviceId": "heater",
+      "deviceName": "电热水器",
+      "startHour": 3,
+      "durationHours": 2,
+      "score": 1.9357
+    }
+  ],
+  "optimizedEV": {
+    "neededKwh": 21,
+    "durationHours": 3,
+    "startHour": 2,
+    "endHour": 5,
+    "score": 7.2279
+  },
+  "rlhfExample": {
+    "price": 0.432,
+    "carbon": 0.288,
+    "comfort": 0.28,
+    "learningRate": 0.03,
+    "streak": 1,
+    "lastDirection": 1
+  }
+}
