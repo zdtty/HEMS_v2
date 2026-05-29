@@ -98,8 +98,6 @@
     return {
       id: String(room.id || `room_${Date.now()}_${index}`),
       name: String(room.name || "新房间"),
-      grid: room.grid || autoGrid(index).grid,
-      row: room.row || autoGrid(index).row,
       color: room.color || palette[index % palette.length],
       power: String(room.power || "0.20 kW"),
       temp: String(room.temp || "24.5°C"),
@@ -112,8 +110,18 @@
   }
 
   function autoGrid(index) {
-    const col = index % 3;
-    const row = Math.floor(index / 3);
+    const firstSlots = [
+      { grid: "1 / span 4", row: "1 / span 2" },
+      { grid: "5 / span 2", row: "1 / span 2" },
+      { grid: "1 / span 2", row: "3 / span 2" },
+      { grid: "3 / span 2", row: "3 / span 2" },
+      { grid: "5 / span 2", row: "3 / span 2" }
+    ];
+    if (firstSlots[index]) return firstSlots[index];
+
+    const compactIndex = index - firstSlots.length;
+    const col = compactIndex % 3;
+    const row = Math.floor(compactIndex / 3) + 2;
     return {
       grid: `${col * 2 + 1} / span 2`,
       row: `${row * 2 + 1} / span 2`
@@ -146,8 +154,10 @@
         </div>
       </div>
       <div class="hems-twin__map" role="group" aria-label="家庭平面孪生房间图">
-        ${rooms.map((room) => `
-          <button class="hems-room ${room.id === selectedId ? "is-active" : ""}" data-room="${room.id}" style="--c:${room.grid};--r:${room.row};--room-color:${room.color}" type="button">
+        ${rooms.map((room, index) => {
+          const layout = autoGrid(index);
+          return `
+          <button class="hems-room ${room.id === selectedId ? "is-active" : ""}" data-room="${room.id}" style="--c:${layout.grid};--r:${layout.row};--room-color:${room.color}" type="button">
             <span class="hems-room__top">
               <span class="hems-room__name">${escapeHtml(room.name)}</span>
               <span class="hems-room__state"></span>
@@ -157,7 +167,8 @@
               <span class="hems-room__power">${escapeHtml(room.power)}</span>
             </span>
           </button>
-        `).join("")}
+        `;
+        }).join("")}
       </div>
       <form class="hems-twin__add-room" data-twin-form="room">
         <input class="hems-twin__input" name="roomName" maxlength="8" placeholder="新增房间名" autocomplete="off">
@@ -223,12 +234,9 @@
   function addRoom(name) {
     const trimmed = name.trim();
     if (!trimmed) return;
-    const grid = autoGrid(rooms.length);
     const room = normalizeRoom({
       id: `room_${Date.now()}`,
       name: trimmed,
-      grid: grid.grid,
-      row: grid.row,
       color: palette[rooms.length % palette.length],
       devices: []
     }, rooms.length);
