@@ -17,6 +17,7 @@
 | `/api/health` | GET | 返回服务状态和已启用模块 |
 | `/api/signals` | GET | 返回 24 小时电价、碳强度、室外温度信号 |
 | `/api/twin/simulate` | POST | 运行住宅热力学数字孪生仿真 |
+| `/api/twin/multi-room` | POST | 运行多房间耦合热模型 |
 | `/api/optimize/schedule` | POST | 对可平移负荷、柔性 HVAC 和 EV 充电进行调度 |
 | `/api/feedback` | POST | 根据用户反馈更新 RLHF 权重 |
 | `/api/matter/command` | POST | 生成 Matter 风格控制指令 |
@@ -31,7 +32,7 @@ npm start
 
 核心算法位于 `src/core/`。
 
-- `twin.js`：等效热参数模型与 Heun 改进欧拉法求解。
+- `twin.js`：等效热参数模型、Heun 改进欧拉法求解、多房间耦合热模型。
 - `optimizer.js`：负荷分类、可平移负荷优化、柔性 HVAC 策略和 EV 充电窗口优化。
 - `rlhf.js`：舒适度反馈驱动的权重更新和自适应学习率。
 - `matter.js`：Matter 指令结构化模拟。
@@ -45,10 +46,17 @@ npm start
 npm run experiment
 ```
 
+API 烟囱演示：
+
+```bash
+npm run demo:api
+```
+
 ## 5. 当前边界
 
 本项目目前仍是“原型 + 可复现实验”阶段：
 
 - Matter 是指令模拟，不是真实设备接入。
 - 前端 GitHub Pages 默认仍可静态运行；后端 API 需要本地单独启动。
+- 首页会显示“边缘决策服务”连接状态。本地启动 `npm start` 后，可通过 `window.HEMS_API_BASE` 指定 API 地址。
 - 实验数据为典型日模拟信号，后续可替换为真实电价、天气和碳强度数据源。

@@ -1,7 +1,7 @@
 const http = require("http");
 const { URL } = require("url");
 const { normalizeSignals } = require("../src/core/signals");
-const { simulateDay, houseFromInsulation } = require("../src/core/twin");
+const { simulateDay, simulateMultiRoom, houseFromInsulation } = require("../src/core/twin");
 const { evaluateScenario } = require("../src/core/optimizer");
 const { updateComfortWeights } = require("../src/core/rlhf");
 const matter = require("../src/core/matter");
@@ -63,6 +63,11 @@ async function handle(req, res) {
         ...body,
         house: body.house || houseFromInsulation(body.insulation)
       }));
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/twin/multi-room") {
+      const body = await readBody(req);
+      return json(res, 200, simulateMultiRoom(body));
     }
 
     if (req.method === "POST" && url.pathname === "/api/optimize/schedule") {

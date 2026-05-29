@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server/index.js",
+    "demo:api": "node scripts/demo-api.js",
     "experiment": "node experiments/run-baseline.js",
     "test": "node tests/core.test.js"
   },

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { price, carbon, outdoorTemp } = require("../src/core/signals");
-const { simulateDay } = require("../src/core/twin");
+const { simulateDay, simulateMultiRoom } = require("../src/core/twin");
 const { evaluateScenario } = require("../src/core/optimizer");
 const { updateComfortWeights } = require("../src/core/rlhf");
 
@@ -44,6 +44,7 @@ const output = {
   generatedAt: new Date().toISOString(),
   signals,
   results,
+  multiRoomTwin: simulateMultiRoom({ signals }),
   optimizedShiftableSchedules: proposed.schedules,
   optimizedEV: proposed.ev,
   rlhfExample: feedbackAfterCold

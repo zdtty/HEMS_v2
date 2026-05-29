@@ -85,4 +85,71 @@ function simulateDay(config = {}) {
   };
 }
 
-module.exports = { houseFromInsulation, heunStep, simulateDay };
+function simulateMultiRoom(config = {}) {
+  const rooms = config.rooms && config.rooms.length ? config.rooms : [
+    { id: "living", name: "客厅", initialTemp: 27, targetTemp: 24, hvacRatedKw: 2.2, areaWeight: 1.4 },
+    { id: "bedroom", name: "主卧", initialTemp: 26, targetTemp: 24.5, hvacRatedKw: 1.5, areaWeight: 1.0 },
+    { id: "study", name: "书房", initialTemp: 26.5, targetTemp: 24.5, hvacRatedKw: 1.2, areaWeight: 0.8 }
+  ];
+  const coupling = Number(config.coupling || 0.035);
+  const signals = normalizeSignals(config.signals);
+  const states = rooms.map((room) => ({
+    ...room,
+    state: { temp: Number(room.initialTemp || config.initialTemp || 27), timeMin: 0 },
+    trace: [],
+    comfortMinutes: 0,
+    hvacKwh: 0
+  }));
+
+  for (let hour = 0; hour < 24; hour += 1) {
+    for (let minute = 0; minute < 60; minute += 1) {
+      const averageTemp = states.reduce((sum, room) => sum + room.state.temp, 0) / states.length;
+      states.forEach((room) => {
+        const schedule = room.schedule || config.schedule || Array(24).fill(0.45);
+        const ratio = Math.max(0, Math.min(1, Number(schedule[hour] || 0)));
+        const hvacKw = Number(room.hvacRatedKw || 1.5) * ratio;
+        const coupledOutdoor = signals.outdoorTemp[hour] + (averageTemp - room.state.temp) * coupling;
+        room.state = heunStep(room.state, {
+          minutes: 1,
+          outdoorTemp: coupledOutdoor,
+          hvacKw,
+          house: room.house || houseFromInsulation(room.insulation || config.insulation),
+          mode: "cooling"
+        });
+        room.hvacKwh += hvacKw / 60;
+        const target = Number(room.targetTemp || config.targetTemp || 24);
+        const tolerance = Number(room.tolerance || config.tolerance || 2);
+        if (Math.abs(room.state.temp - target) <= tolerance) room.comfortMinutes += 1;
+      });
+    }
+
+    states.forEach((room) => {
+      room.trace.push({
+        hour,
+        indoorTemp: Number(room.state.temp.toFixed(2)),
+        outdoorTemp: signals.outdoorTemp[hour]
+      });
+    });
+  }
+
+  const roomResults = states.map((room) => ({
+    id: room.id,
+    name: room.name,
+    trace: room.trace,
+    hvacKwh: Number(room.hvacKwh.toFixed(3)),
+    comfortRate: Number((room.comfortMinutes / 1440).toFixed(4)),
+    finalTemp: Number(room.state.temp.toFixed(2))
+  }));
+  const totalWeightedArea = states.reduce((sum, room) => sum + Number(room.areaWeight || 1), 0);
+  const weightedComfort = roomResults.reduce((sum, room, index) => {
+    return sum + room.comfortRate * Number(states[index].areaWeight || 1);
+  }, 0) / totalWeightedArea;
+
+  return {
+    rooms: roomResults,
+    totalHvacKwh: Number(roomResults.reduce((sum, room) => sum + room.hvacKwh, 0).toFixed(3)),
+    weightedComfortRate: Number(weightedComfort.toFixed(4))
+  };
+}
+
+module.exports = { houseFromInsulation, heunStep, simulateDay, simulateMultiRoom };

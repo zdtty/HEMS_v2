@@ -1,0 +1,52 @@
+.hems-api {
+  margin: 0 16px 12px;
+  padding: 10px 12px;
+  border: 1px solid #e6edf5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1d1d1f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hems-api__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hems-api__title {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hems-api__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6e7781;
+}
+
+.hems-api__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f5a623;
+}
+
+.hems-api.is-online .hems-api__dot {
+  background: #30b861;
+}
+
+.hems-api.is-offline .hems-api__dot {
+  background: #ff453a;
+}
+
+.hems-api__meta {
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #86868b;
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T09:35:51.555Z",
+  "generatedAt": "2026-05-29T12:05:53.359Z",
   "signals": {
     "price": [
       0.36,
@@ -103,6 +103,399 @@
       "comfortRatePct": 86.9
     }
   ],
+  "multiRoomTwin": {
+    "rooms": [
+      {
+        "id": "living",
+        "name": "客厅",
+        "trace": [
+          {
+            "hour": 0,
+            "indoorTemp": 26.78,
+            "outdoorTemp": 27
+          },
+          {
+            "hour": 1,
+            "indoorTemp": 26.56,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 2,
+            "indoorTemp": 26.32,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 3,
+            "indoorTemp": 26.08,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 4,
+            "indoorTemp": 25.86,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 5,
+            "indoorTemp": 25.68,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 6,
+            "indoorTemp": 25.55,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 7,
+            "indoorTemp": 25.46,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 8,
+            "indoorTemp": 25.41,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 9,
+            "indoorTemp": 25.39,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 10,
+            "indoorTemp": 25.4,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 11,
+            "indoorTemp": 25.42,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 12,
+            "indoorTemp": 25.41,
+            "outdoorTemp": 39
+          },
+          {
+            "hour": 13,
+            "indoorTemp": 25.39,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 14,
+            "indoorTemp": 25.36,
+            "outdoorTemp": 37
+          },
+          {
+            "hour": 15,
+            "indoorTemp": 25.31,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 16,
+            "indoorTemp": 25.24,
+            "outdoorTemp": 35
+          },
+          {
+            "hour": 17,
+            "indoorTemp": 25.16,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 18,
+            "indoorTemp": 25.06,
+            "outdoorTemp": 32
+          },
+          {
+            "hour": 19,
+            "indoorTemp": 24.93,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 20,
+            "indoorTemp": 24.8,
+            "outdoorTemp": 30
+          },
+          {
+            "hour": 21,
+            "indoorTemp": 24.65,
+            "outdoorTemp": 29
+          },
+          {
+            "hour": 22,
+            "indoorTemp": 24.48,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 23,
+            "indoorTemp": 24.31,
+            "outdoorTemp": 27
+          }
+        ],
+        "hvacKwh": 23.76,
+        "comfortRate": 0.8187,
+        "finalTemp": 24.31
+      },
+      {
+        "id": "bedroom",
+        "name": "主卧",
+        "trace": [
+          {
+            "hour": 0,
+            "indoorTemp": 25.88,
+            "outdoorTemp": 27
+          },
+          {
+            "hour": 1,
+            "indoorTemp": 25.74,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 2,
+            "indoorTemp": 25.59,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 3,
+            "indoorTemp": 25.45,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 4,
+            "indoorTemp": 25.32,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 5,
+            "indoorTemp": 25.22,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 6,
+            "indoorTemp": 25.17,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 7,
+            "indoorTemp": 25.17,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 8,
+            "indoorTemp": 25.2,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 9,
+            "indoorTemp": 25.26,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 10,
+            "indoorTemp": 25.35,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 11,
+            "indoorTemp": 25.45,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 12,
+            "indoorTemp": 25.52,
+            "outdoorTemp": 39
+          },
+          {
+            "hour": 13,
+            "indoorTemp": 25.57,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 14,
+            "indoorTemp": 25.61,
+            "outdoorTemp": 37
+          },
+          {
+            "hour": 15,
+            "indoorTemp": 25.64,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 16,
+            "indoorTemp": 25.65,
+            "outdoorTemp": 35
+          },
+          {
+            "hour": 17,
+            "indoorTemp": 25.64,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 18,
+            "indoorTemp": 25.6,
+            "outdoorTemp": 32
+          },
+          {
+            "hour": 19,
+            "indoorTemp": 25.54,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 20,
+            "indoorTemp": 25.48,
+            "outdoorTemp": 30
+          },
+          {
+            "hour": 21,
+            "indoorTemp": 25.39,
+            "outdoorTemp": 29
+          },
+          {
+            "hour": 22,
+            "indoorTemp": 25.3,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 23,
+            "indoorTemp": 25.18,
+            "outdoorTemp": 27
+          }
+        ],
+        "hvacKwh": 16.2,
+        "comfortRate": 1,
+        "finalTemp": 25.18
+      },
+      {
+        "id": "study",
+        "name": "书房",
+        "trace": [
+          {
+            "hour": 0,
+            "indoorTemp": 26.4,
+            "outdoorTemp": 27
+          },
+          {
+            "hour": 1,
+            "indoorTemp": 26.29,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 2,
+            "indoorTemp": 26.17,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 3,
+            "indoorTemp": 26.04,
+            "outdoorTemp": 25
+          },
+          {
+            "hour": 4,
+            "indoorTemp": 25.94,
+            "outdoorTemp": 26
+          },
+          {
+            "hour": 5,
+            "indoorTemp": 25.87,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 6,
+            "indoorTemp": 25.84,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 7,
+            "indoorTemp": 25.86,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 8,
+            "indoorTemp": 25.91,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 9,
+            "indoorTemp": 26,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 10,
+            "indoorTemp": 26.11,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 11,
+            "indoorTemp": 26.22,
+            "outdoorTemp": 40
+          },
+          {
+            "hour": 12,
+            "indoorTemp": 26.32,
+            "outdoorTemp": 39
+          },
+          {
+            "hour": 13,
+            "indoorTemp": 26.39,
+            "outdoorTemp": 38
+          },
+          {
+            "hour": 14,
+            "indoorTemp": 26.45,
+            "outdoorTemp": 37
+          },
+          {
+            "hour": 15,
+            "indoorTemp": 26.5,
+            "outdoorTemp": 36
+          },
+          {
+            "hour": 16,
+            "indoorTemp": 26.52,
+            "outdoorTemp": 35
+          },
+          {
+            "hour": 17,
+            "indoorTemp": 26.53,
+            "outdoorTemp": 34
+          },
+          {
+            "hour": 18,
+            "indoorTemp": 26.51,
+            "outdoorTemp": 32
+          },
+          {
+            "hour": 19,
+            "indoorTemp": 26.48,
+            "outdoorTemp": 31
+          },
+          {
+            "hour": 20,
+            "indoorTemp": 26.43,
+            "outdoorTemp": 30
+          },
+          {
+            "hour": 21,
+            "indoorTemp": 26.36,
+            "outdoorTemp": 29
+          },
+          {
+            "hour": 22,
+            "indoorTemp": 26.28,
+            "outdoorTemp": 28
+          },
+          {
+            "hour": 23,
+            "indoorTemp": 26.19,
+            "outdoorTemp": 27
+          }
+        ],
+        "hvacKwh": 12.96,
+        "comfortRate": 0.8653,
+        "finalTemp": 26.19
+      }
+    ],
+    "totalHvacKwh": 52.92,
+    "weightedComfortRate": 0.887
+  },
   "optimizedShiftableSchedules": [
     {
       "deviceId": "washer",

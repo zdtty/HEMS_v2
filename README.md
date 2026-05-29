@@ -20,6 +20,12 @@ npm start
 npm test
 ```
 
+运行 API 烟囱演示：
+
+```bash
+npm run demo:api
+```
+
 运行仿真实验：
 
 ```bash
@@ -48,6 +54,8 @@ docs/                   架构与实现说明
 - RLHF 权重更新：已补充 `src/core/rlhf.js`。
 - Matter 指令模拟：已补充 `src/core/matter.js`。
 - 可复现实验：已补充 `experiments/run-baseline.js`。
+- 多区数字孪生：已补充 `simulateMultiRoom` 与 `/api/twin/multi-room`。
+- 前端 API 桥接：首页会显示边缘 API 连接状态，本地启动后可验证前后端联通。
 
 ## 注意
 

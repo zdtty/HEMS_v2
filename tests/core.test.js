@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { heunStep, simulateDay } = require("../src/core/twin");
+const { heunStep, simulateDay, simulateMultiRoom } = require("../src/core/twin");
 const { optimizeShiftable, optimizeEV, classifyLoad } = require("../src/core/optimizer");
 const { updateComfortWeights } = require("../src/core/rlhf");
 const { command } = require("../src/core/matter");
@@ -21,6 +21,11 @@ assert.strictEqual(next.timeMin, 1);
 const twin = simulateDay({ schedule: Array(24).fill(0.5) });
 assert.strictEqual(twin.trace.length, 24);
 assert(twin.comfortRate >= 0 && twin.comfortRate <= 1);
+
+const multiRoom = simulateMultiRoom();
+assert.strictEqual(multiRoom.rooms.length, 3);
+assert(multiRoom.totalHvacKwh > 0);
+assert(multiRoom.weightedComfortRate >= 0 && multiRoom.weightedComfortRate <= 1);
 
 const shift = optimizeShiftable(
   { id: "washer", name: "洗衣机", rated: 500, shiftable: true, cycleMins: 60, deadlineHour: 23 },
