@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <style>
+      .page { fill: #ffffff; stroke: #111111; stroke-width: 1.5; }
+      .layer { fill: #fbfbfb; stroke: #111111; stroke-width: 3; }
+      .box { fill: #f4f4f4; stroke: #333333; stroke-width: 2; }
+      .box2 { fill: #ffffff; stroke: #333333; stroke-width: 2; }
+      .labelBox { fill: #ffffff; stroke: #333333; stroke-width: 2; }
+      .title { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 34px; font-weight: 700; fill: #1f1f1f; }
+      .layer-title { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 26px; font-weight: 600; fill: #1f1f1f; }
+      .label { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 22px; fill: #222222; }
+      .small { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 18px; fill: #333333; }
+      .tiny { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 16px; fill: #333333; }
+      .side { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 21px; fill: #333333; }
+      .arrow { stroke: #111111; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #777777; stroke-width: 2.4; stroke-dasharray: 7 7; fill: none; marker-end: url(#arrowGrey); }
+      .flow-text { font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif; font-size: 17px; fill: #333333; }
+      .chip { fill: #eeeeee; stroke: #4a4a4a; stroke-width: 1.8; }
+    </style>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="12" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 14 7 L 0 14 z" fill="#111111"/>
+    </marker>
+    <marker id="arrowGrey" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#777777"/>
+    </marker>
+  </defs>
+
+  <rect class="page" x="35" y="30" width="1530" height="940"/>
+  <text class="title" x="800" y="82" text-anchor="middle">家庭能源管理系统（HEMS）技术路线说明图</text>
+
+  <!-- Left aligned route labels -->
+  <rect class="labelBox" x="70" y="116" width="160" height="118"/>
+  <text class="side" x="150" y="182" text-anchor="middle">用户交互</text>
+
+  <rect class="labelBox" x="70" y="276" width="160" height="166"/>
+  <text class="side" x="150" y="366" text-anchor="middle">边缘决策</text>
+
+  <rect class="labelBox" x="70" y="484" width="160" height="158"/>
+  <text class="side" x="150" y="570" text-anchor="middle">数字孪生</text>
+
+  <rect class="labelBox" x="70" y="684" width="160" height="138"/>
+  <text class="side" x="150" y="760" text-anchor="middle">设备数据</text>
+
+  <rect class="labelBox" x="70" y="864" width="160" height="70"/>
+  <text class="side" x="150" y="906" text-anchor="middle">基础支撑</text>
+
+  <!-- Application layer -->
+  <rect class="layer" x="260" y="116" width="1120" height="118"/>
+  <text class="layer-title" x="290" y="153">应用交互层</text>
+  <rect class="box" x="315" y="172" width="170" height="42"/>
+  <text class="label" x="400" y="200" text-anchor="middle">首页仪表盘</text>
+  <rect class="box" x="515" y="172" width="170" height="42"/>
+  <text class="label" x="600" y="200" text-anchor="middle">设备管理</text>
+  <rect class="box" x="715" y="172" width="170" height="42"/>
+  <text class="label" x="800" y="200" text-anchor="middle">家庭平面孪生</text>
+  <rect class="box" x="915" y="172" width="170" height="42"/>
+  <text class="label" x="1000" y="200" text-anchor="middle">舒适度反馈</text>
+  <rect class="box" x="1115" y="172" width="170" height="42"/>
+  <text class="label" x="1200" y="200" text-anchor="middle">EV充电与日志</text>
+
+  <!-- Edge API and decision layer -->
+  <rect class="layer" x="260" y="276" width="1120" height="166"/>
+  <text class="layer-title" x="290" y="314">边缘服务与智能决策层</text>
+  <rect class="box2" x="300" y="342" width="190" height="66"/>
+  <text class="label" x="395" y="371" text-anchor="middle">Node.js REST API</text>
+  <text class="tiny" x="395" y="393" text-anchor="middle">本地边缘网关</text>
+  <rect class="box" x="520" y="342" width="160" height="66"/>
+  <text class="label" x="600" y="371" text-anchor="middle">负荷分类器</text>
+  <text class="tiny" x="600" y="393" text-anchor="middle">可平移 / 柔性 / 基础</text>
+  <rect class="box" x="710" y="342" width="170" height="66"/>
+  <text class="label" x="795" y="371" text-anchor="middle">多目标优化器</text>
+  <text class="tiny" x="795" y="393" text-anchor="middle">电费 · 碳排 · 舒适度</text>
+  <rect class="box" x="910" y="342" width="170" height="66"/>
+  <text class="label" x="995" y="371" text-anchor="middle">RLHF权重引擎</text>
+  <text class="tiny" x="995" y="393" text-anchor="middle">用户反馈自适应</text>
+  <rect class="box" x="1110" y="342" width="190" height="66"/>
+  <text class="label" x="1205" y="371" text-anchor="middle">Matter指令模拟</text>
+  <text class="tiny" x="1205" y="393" text-anchor="middle">On/Off · 温控 · 充电</text>
+
+  <!-- Digital twin layer -->
+  <rect class="layer" x="260" y="484" width="1120" height="158"/>
+  <text class="layer-title" x="290" y="522">数字孪生仿真层</text>
+  <rect class="box2" x="300" y="550" width="230" height="64"/>
+  <text class="label" x="415" y="578" text-anchor="middle">住宅热力学模型</text>
+  <text class="tiny" x="415" y="600" text-anchor="middle">ETP 等效热参数</text>
+  <rect class="box2" x="565" y="550" width="230" height="64"/>
+  <text class="label" x="680" y="578" text-anchor="middle">Heun数值求解</text>
+  <text class="tiny" x="680" y="600" text-anchor="middle">1分钟步长 · 预测校正</text>
+  <rect class="box2" x="830" y="550" width="230" height="64"/>
+  <text class="label" x="945" y="578" text-anchor="middle">多房间耦合模型</text>
+  <text class="tiny" x="945" y="600" text-anchor="middle">分区温度 · 气流传热</text>
+  <rect class="box2" x="1095" y="550" width="230" height="64"/>
+  <text class="label" x="1210" y="578" text-anchor="middle">仿真实验评估</text>
+  <text class="tiny" x="1210" y="600" text-anchor="middle">Baseline / Price-only / Proposed</text>
+
+  <!-- Data acquisition layer -->
+  <rect class="layer" x="260" y="684" width="1120" height="138"/>
+  <text class="layer-title" x="290" y="722">设备与数据获取层</text>
+  <rect class="box2" x="300" y="746" width="220" height="54"/>
+  <text class="label" x="410" y="770" text-anchor="middle">智能家电设备</text>
+  <text class="tiny" x="410" y="791" text-anchor="middle">空调 / 洗衣机 / 照明</text>
+  <rect class="box2" x="555" y="746" width="220" height="54"/>
+  <text class="label" x="665" y="770" text-anchor="middle">能源与环境信号</text>
+  <text class="tiny" x="665" y="791" text-anchor="middle">电价 / 碳强度 / 温度</text>
+  <rect class="box2" x="810" y="746" width="220" height="54"/>
+  <text class="label" x="920" y="770" text-anchor="middle">EV与可平移负荷</text>
+  <text class="tiny" x="920" y="791" text-anchor="middle">充电桩 / 热水器 / 机器人</text>
+  <rect class="box2" x="1065" y="746" width="220" height="54"/>
+  <text class="label" x="1175" y="770" text-anchor="middle">本地设备池</text>
+  <text class="tiny" x="1175" y="791" text-anchor="middle">hems.devices.v1 同步存储</text>
+
+  <!-- Foundation layer -->
+  <rect class="layer" x="260" y="864" width="1120" height="70"/>
+  <rect class="chip" x="300" y="881" width="175" height="36"/>
+  <text class="small" x="387" y="905" text-anchor="middle">React / GitHub Pages</text>
+  <rect class="chip" x="510" y="881" width="175" height="36"/>
+  <text class="small" x="597" y="905" text-anchor="middle">Node.js 边缘服务</text>
+  <rect class="chip" x="720" y="881" width="175" height="36"/>
+  <text class="small" x="807" y="905" text-anchor="middle">REST API</text>
+  <rect class="chip" x="930" y="881" width="175" height="36"/>
+  <text class="small" x="1017" y="905" text-anchor="middle">本地隐私计算</text>
+  <rect class="chip" x="1140" y="881" width="175" height="36"/>
+  <text class="small" x="1227" y="905" text-anchor="middle">可复现实验脚本</text>
+
+  <!-- Layer connection lane: data and request flow -->
+  <path class="arrow" d="M820 234 L820 264"/>
+  <text class="flow-text" x="842" y="258">请求 / 状态 / 控制指令</text>
+
+  <path class="arrow" d="M820 442 L820 472"/>
+  <text class="flow-text" x="842" y="466">仿真状态 / 预测结果 / 调度方案</text>
+
+  <path class="arrow" d="M820 642 L820 672"/>
+  <text class="flow-text" x="842" y="666">传感数据 / 设备状态 / 外部信号</text>
+
+  <path class="arrow" d="M820 822 L820 852"/>
+  <text class="flow-text" x="842" y="846">运行环境与工程支撑</text>
+
+  <!-- Right side feedback lane -->
+  <path class="dash" d="M1435 720 L1435 390 L1388 390"/>
+  <text class="flow-text" x="1435" y="535" text-anchor="middle">控制回写 / 参数校准</text>
+  <text class="flow-text" x="1435" y="562" text-anchor="middle">用户反馈</text>
+
+  <path class="arrow" d="M490 408 L490 550"/>
+  <text class="flow-text" x="506" y="484">边缘API驱动仿真</text>
+  <path class="arrow" d="M1335 408 L1335 746"/>
+  <text class="flow-text" x="1350" y="682">Matter指令下发</text>
+</svg>
