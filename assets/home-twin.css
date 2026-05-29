@@ -13,7 +13,7 @@
 
 .hems-twin__head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
@@ -25,21 +25,26 @@
   font-weight: 700;
 }
 
-.hems-twin__sub {
-  margin-top: 2px;
-  font-size: 10px;
-  line-height: 1.4;
-  color: #86868b;
+.hems-twin__tools {
+  display: flex;
+  gap: 6px;
 }
 
-.hems-twin__badge {
-  flex: 0 0 auto;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #e8f7ef;
-  color: #1a8f55;
-  font-size: 10px;
+.hems-twin__tool,
+.hems-twin__primary,
+.hems-twin__danger {
+  min-height: 30px;
+  border-radius: 8px;
+  font-size: 11px;
   font-weight: 700;
+  cursor: pointer;
+}
+
+.hems-twin__tool {
+  padding: 0 10px;
+  border: 1px solid #dcecff;
+  background: #f4f9ff;
+  color: #0a84ff;
 }
 
 .hems-twin__map {
@@ -47,6 +52,7 @@
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-template-rows: repeat(5, 45px);
+  grid-auto-rows: 45px;
   gap: 6px;
   padding: 8px;
   border-radius: 8px;
@@ -56,6 +62,7 @@
     #f4f8fc;
   background-size: calc((100% - 16px) / 6) 51px, calc((100% - 16px) / 6) 51px, auto;
   border: 1px solid #e2edf7;
+  overflow: auto;
 }
 
 .hems-room {
@@ -141,6 +148,7 @@
 
 .hems-twin__detail-head {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
@@ -158,10 +166,21 @@
 }
 
 .hems-twin__score {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
   color: #34a853;
   font-size: 18px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+}
+
+.hems-twin__score-label {
+  color: #6e7781;
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .hems-twin__metrics {
@@ -190,19 +209,80 @@
   font-variant-numeric: tabular-nums;
 }
 
+.hems-twin__add-room,
+.hems-twin__add-device {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.hems-twin__add-room {
+  margin-top: 8px;
+}
+
+.hems-twin__add-device {
+  margin: 8px 0 10px;
+}
+
+.hems-twin__input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0 9px;
+  border: 1px solid #e1e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1d1d1f;
+  font-size: 11px;
+  outline: none;
+}
+
+.hems-twin__input:focus {
+  border-color: #0a84ff;
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.12);
+}
+
+.hems-twin__primary {
+  padding: 0 10px;
+  border: none;
+  background: #0a84ff;
+  color: #ffffff;
+}
+
+.hems-twin__section-title {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #374151;
+}
+
 .hems-twin__devices {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 10px;
 }
 
 .hems-twin__device {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 5px 8px;
   border-radius: 999px;
   background: #ffffff;
   border: 1px solid #e5edf5;
   color: #4b5563;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.hems-twin__device span {
+  color: #9aa4b2;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.hems-twin__empty {
+  color: #9aa4b2;
   font-size: 10px;
 }
 
@@ -217,6 +297,7 @@
 
 .hems-twin__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 10px;
 }
@@ -233,6 +314,20 @@
   box-shadow: inset 0 0 0 1px #dcecff;
 }
 
+.hems-twin__danger {
+  flex: 1;
+  min-width: 72px;
+  padding: 8px 6px;
+  border: 1px solid #ffe0e0;
+  background: #fff7f7;
+  color: #d92d20;
+}
+
+.hems-twin__danger:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
 @media (max-width: 380px) {
   .hems-twin {
     margin-left: 12px;
@@ -242,6 +337,7 @@
 
   .hems-twin__map {
     grid-template-rows: repeat(5, 39px);
+    grid-auto-rows: 39px;
     gap: 5px;
   }
 
@@ -255,5 +351,10 @@
 
   .hems-room__power {
     font-size: 12px;
+  }
+
+  .hems-twin__add-room,
+  .hems-twin__add-device {
+    grid-template-columns: 1fr;
   }
 }
