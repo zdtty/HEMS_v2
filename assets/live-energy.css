@@ -1,0 +1,247 @@
+.hems-live-energy {
+  margin: 12px 16px 14px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  color: #1d1d1f;
+}
+
+.hems-live-energy * {
+  box-sizing: border-box;
+}
+
+.hems-live-energy__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hems-live-energy__title {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.hems-live-energy__meta {
+  margin-top: 2px;
+  font-size: 10px;
+  color: #86868b;
+}
+
+.hems-live-energy__city-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid #dcecff;
+  border-radius: 8px;
+  background: #f4f9ff;
+  color: #0a84ff;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.hems-live-energy__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.hems-live-energy__weather,
+.hems-live-energy__mix {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.hems-live-energy__weather-main {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.hems-live-energy__temp {
+  color: #0a84ff;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.hems-live-energy__condition {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.hems-live-energy__details {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #6e7781;
+  line-height: 1.55;
+}
+
+.hems-live-energy__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hems-live-energy__metric {
+  padding: 7px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+}
+
+.hems-live-energy__metric-label {
+  font-size: 9px;
+  color: #86868b;
+}
+
+.hems-live-energy__metric-value {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.hems-live-energy__mix-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hems-live-energy__mix-title {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.hems-live-energy__mix-sub {
+  margin-top: 2px;
+  font-size: 9px;
+  color: #86868b;
+}
+
+.hems-live-energy__green-score {
+  color: #34a853;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.hems-live-energy__bar {
+  display: grid;
+  grid-template-columns: var(--thermal) var(--hydro) var(--wind) var(--solar) var(--nuclear);
+  height: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.hems-live-energy__bar span:nth-child(1) { background: #94a3b8; }
+.hems-live-energy__bar span:nth-child(2) { background: #38bdf8; }
+.hems-live-energy__bar span:nth-child(3) { background: #34d399; }
+.hems-live-energy__bar span:nth-child(4) { background: #facc15; }
+.hems-live-energy__bar span:nth-child(5) { background: #8b5cf6; }
+
+.hems-live-energy__legend {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.hems-live-energy__legend-item {
+  min-width: 0;
+  font-size: 9px;
+  color: #6e7781;
+  white-space: nowrap;
+}
+
+.hems-live-energy__legend-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 3px;
+  border-radius: 50%;
+  vertical-align: 0;
+}
+
+.hems-live-energy__legend-item:nth-child(1) .hems-live-energy__legend-dot { background: #94a3b8; }
+.hems-live-energy__legend-item:nth-child(2) .hems-live-energy__legend-dot { background: #38bdf8; }
+.hems-live-energy__legend-item:nth-child(3) .hems-live-energy__legend-dot { background: #34d399; }
+.hems-live-energy__legend-item:nth-child(4) .hems-live-energy__legend-dot { background: #facc15; }
+.hems-live-energy__legend-item:nth-child(5) .hems-live-energy__legend-dot { background: #8b5cf6; }
+
+.hems-live-energy__advice {
+  margin-top: 10px;
+  padding: 9px 10px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.hems-live-energy__cities {
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hems-live-energy.is-choosing .hems-live-energy__cities {
+  display: grid;
+}
+
+.hems-live-energy__city {
+  min-height: 30px;
+  padding: 0 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.hems-live-energy__city.is-active {
+  border-color: #0a84ff;
+  background: #eaf4ff;
+  color: #0a84ff;
+}
+
+.hems-live-energy__source {
+  margin-top: 8px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: #86868b;
+}
+
+.hems-live-energy.is-loading .hems-live-energy__weather,
+.hems-live-energy.is-loading .hems-live-energy__mix {
+  opacity: 0.72;
+}
+
+@media (max-width: 420px) {
+  .hems-live-energy__cities {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hems-live-energy__legend {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
