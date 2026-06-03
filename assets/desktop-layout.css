@@ -1,0 +1,166 @@
+@media (min-width: 900px) {
+  html,
+  body {
+    min-height: 100%;
+    background:
+      linear-gradient(180deg, #eef5ff 0%, #f6f8fb 260px, #f4f7fb 100%);
+  }
+
+  body {
+    overflow-y: auto;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  .hems-desktop-app {
+    width: 100% !important;
+    max-width: 1180px !important;
+    min-height: 100vh !important;
+    margin: 0 auto !important;
+    padding: 24px 24px 112px 112px !important;
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    align-items: start !important;
+    gap: 16px !important;
+    background: transparent !important;
+  }
+
+  .hems-desktop-panel {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hems-desktop-span-3 { grid-column: span 3 !important; }
+  .hems-desktop-span-4 { grid-column: span 4 !important; }
+  .hems-desktop-span-5 { grid-column: span 5 !important; }
+  .hems-desktop-span-6 { grid-column: span 6 !important; }
+  .hems-desktop-span-7 { grid-column: span 7 !important; }
+  .hems-desktop-span-8 { grid-column: span 8 !important; }
+  .hems-desktop-span-12 { grid-column: 1 / -1 !important; }
+
+  .hems-desktop-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 20 !important;
+    padding: 8px 4px 4px !important;
+    background: transparent !important;
+  }
+
+  .hems-desktop-header h1,
+  .hems-desktop-header [style*="font-size: 20"],
+  .hems-desktop-header [style*="fontSize: 20"] {
+    font-size: 28px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hems-desktop-nav {
+    position: fixed !important;
+    top: 16px !important;
+    right: auto !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    transform: none !important;
+    width: 84px !important;
+    max-width: 84px !important;
+    height: auto !important;
+    padding: 12px 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    border-radius: 18px !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12) !important;
+    backdrop-filter: blur(14px);
+  }
+
+  .hems-desktop-nav button {
+    flex: 0 0 auto !important;
+    min-height: 66px !important;
+    padding: 8px 4px !important;
+    border-radius: 14px !important;
+    justify-content: center !important;
+  }
+
+  .hems-desktop-nav button:hover {
+    background: #eff6ff !important;
+  }
+
+  .hems-desktop-nav span:first-child {
+    font-size: 20px !important;
+  }
+
+  .hems-desktop-nav span:last-child {
+    font-size: 11px !important;
+  }
+
+  .hems-live-energy {
+    margin: 0 !important;
+    min-height: 100%;
+  }
+
+  .hems-live-energy__grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hems-live-energy__cities {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .hems-twin {
+    margin: 0 !important;
+  }
+
+  .hems-twin__map {
+    grid-template-rows: repeat(5, 62px) !important;
+    grid-auto-rows: 62px !important;
+  }
+
+  .hems-room {
+    padding: 10px !important;
+  }
+
+  .hems-room__name {
+    font-size: 13px !important;
+  }
+
+  .hems-room__power {
+    font-size: 16px !important;
+  }
+
+  .hems-twin__metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .hems-api {
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1080px) {
+  .hems-desktop-app {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+    padding-left: 104px !important;
+  }
+
+  .hems-desktop-span-3,
+  .hems-desktop-span-4 {
+    grid-column: span 4 !important;
+  }
+
+  .hems-desktop-span-5,
+  .hems-desktop-span-6,
+  .hems-desktop-span-7,
+  .hems-desktop-span-8 {
+    grid-column: span 8 !important;
+  }
+
+  .hems-desktop-span-12 {
+    grid-column: 1 / -1 !important;
+  }
+}
