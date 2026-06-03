@@ -1,6 +1,19 @@
 (function () {
   const mq = window.matchMedia("(min-width: 900px)");
+  const modeKey = "hems-layout-mode";
   let scheduled = false;
+  let toggleButton = null;
+
+  try {
+    const requestedMode = new URLSearchParams(window.location.search).get("mode");
+    if (requestedMode === "app" || requestedMode === "mobile") {
+      localStorage.setItem(modeKey, "mobile");
+    } else if (requestedMode === "desktop") {
+      localStorage.removeItem(modeKey);
+    }
+  } catch (_) {
+    // Ignore storage failures in private or restricted browser contexts.
+  }
 
   function textOf(node) {
     return node && node.innerText ? node.innerText : "";
@@ -99,7 +112,10 @@
     const app = root && root.firstElementChild;
     if (!app) return;
 
-    if (!mq.matches) {
+    const forceMobile = localStorage.getItem(modeKey) === "mobile";
+    document.documentElement.classList.toggle("hems-force-mobile", forceMobile);
+
+    if (!mq.matches || forceMobile) {
       app.classList.remove("hems-desktop-app");
       document.querySelectorAll(".hems-desktop-panel,.hems-desktop-nav,.hems-desktop-header").forEach((node) => {
         node.classList.remove(
@@ -115,9 +131,11 @@
           "hems-desktop-span-12"
         );
       });
+      updateToggle(forceMobile);
       return;
     }
 
+    updateToggle(false);
     app.classList.add("hems-desktop-app");
     Array.from(app.children).forEach(classifyPanel);
   }
@@ -132,6 +150,7 @@
   }
 
   function start() {
+    createToggle();
     schedule();
     mq.addEventListener ? mq.addEventListener("change", schedule) : mq.addListener(schedule);
     const root = document.getElementById("root");
@@ -143,5 +162,29 @@
     document.addEventListener("DOMContentLoaded", start, { once: true });
   } else {
     start();
+  }
+
+  function createToggle() {
+    if (toggleButton) return;
+    toggleButton = document.createElement("button");
+    toggleButton.className = "hems-layout-toggle";
+    toggleButton.type = "button";
+    toggleButton.setAttribute("aria-label", "切换桌面版和APP版");
+    toggleButton.addEventListener("click", () => {
+      const next = localStorage.getItem(modeKey) === "mobile" ? "desktop" : "mobile";
+      if (next === "mobile") {
+        localStorage.setItem(modeKey, "mobile");
+      } else {
+        localStorage.removeItem(modeKey);
+      }
+      schedule();
+    });
+    document.body.appendChild(toggleButton);
+  }
+
+  function updateToggle(forceMobile) {
+    if (!toggleButton) return;
+    toggleButton.textContent = forceMobile ? "桌面版" : "APP版";
+    toggleButton.classList.toggle("is-mobile", forceMobile);
   }
 })();
