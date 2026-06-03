@@ -8,7 +8,7 @@
     "📱": `<rect ${stroke} x="7" y="3" width="10" height="18" rx="2.4"/><path ${stroke} d="M10.5 6h3M11.5 18h1"/>`,
     "📅": `<rect ${stroke} x="4" y="5.5" width="16" height="14" rx="2"/><path ${stroke} d="M8 3.5v4M16 3.5v4M4 10h16M8 14h.01M12 14h.01M16 14h.01"/>`,
     "🌡️": `<path ${stroke} d="M10 14.2V5.5a2 2 0 1 1 4 0v8.7a4 4 0 1 1-4 0Z"/><path ${stroke} d="M12 9v6"/>`,
-    "🔌": `<path ${stroke} d="M9 3v6M15 3v6M7 9h10v3a5 5 0 0 1-10 0V9Z"/><path ${stroke} d="M12 17v4"/>`,
+    "🔌": `<path ${stroke} d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z"/>`,
     "📋": `<rect ${stroke} x="6" y="5" width="12" height="16" rx="2"/><path ${stroke} d="M9 5.5A3 3 0 0 1 12 3a3 3 0 0 1 3 2.5M9 10h6M9 14h6M9 18h4"/>`,
     "❄️": `<path ${stroke} d="M12 3v18M5.5 6.5l13 11M18.5 6.5l-13 11M8 3.8l4 3.2 4-3.2M8 20.2l4-3.2 4 3.2"/>`,
     "🔥": `<path ${stroke} d="M12 21c-3.3 0-5.8-2.2-5.8-5.4 0-2 1.1-3.7 2.7-5.1 1.6-1.4 2.4-3.1 2.2-5.5 2.6 1.5 4.8 4 4.4 7 .9-.8 1.5-1.8 1.8-3 1.2 1.3 2.1 3.2 2.1 5.3C19.4 18.2 16.2 21 12 21Z"/>`,
@@ -45,6 +45,12 @@
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
     svg.innerHTML = icons[token];
+    const accent = document.createElementNS(NS, "circle");
+    accent.setAttribute("class", "hems-line-icon__accent");
+    accent.setAttribute("cx", "18.3");
+    accent.setAttribute("cy", "5.7");
+    accent.setAttribute("r", "2.05");
+    svg.appendChild(accent);
     span.appendChild(svg);
     return span;
   }
@@ -109,6 +115,7 @@
     if (!root) return;
 
     polish(root);
+    upgradeIcons(root);
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         mutation.addedNodes.forEach((node) => {
@@ -119,6 +126,7 @@
           }
         });
       }
+      upgradeIcons(root);
     });
 
     observer.observe(root, { childList: true, subtree: true });
@@ -128,5 +136,36 @@
     document.addEventListener("DOMContentLoaded", start, { once: true });
   } else {
     start();
+  }
+
+  function upgradeIcons(root) {
+    root.querySelectorAll("button span").forEach((span) => {
+      if (span.textContent && span.textContent.trim() === "充电") {
+        span.textContent = "汽车";
+      }
+    });
+
+    root.querySelectorAll(".hems-line-icon").forEach((icon) => {
+      const parent = icon.parentElement;
+      if (!parent) return;
+
+      const computed = window.getComputedStyle(parent);
+      const size = parseFloat(computed.fontSize || "0");
+      const isButton = Boolean(parent.closest("button"));
+      const isNav = Boolean(parent.closest(".hems-desktop-nav"));
+      const isHero = size >= 28 || parent.closest('[style*="font-size: 40px"],[style*="font-size:40px"],[style*="font-size: 32px"],[style*="font-size:32px"],[style*="font-size: 28px"],[style*="font-size:28px"]');
+
+      if (isButton || isNav || isHero) {
+        icon.classList.add("is-premium");
+      }
+
+      if (computed.color.includes("52, 168, 83") || computed.color.includes("34, 197, 94") || computed.color.includes("16, 185, 129")) {
+        icon.classList.add("is-green");
+      } else if (computed.color.includes("255, 159, 10") || computed.color.includes("245, 158, 11") || computed.color.includes("251, 146, 60")) {
+        icon.classList.add("is-orange");
+      } else if (computed.color.includes("142, 92, 247") || computed.color.includes("124, 92, 255")) {
+        icon.classList.add("is-purple");
+      }
+    });
   }
 })();
