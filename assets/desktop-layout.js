@@ -3,6 +3,7 @@
   const modeKey = "hems-layout-mode";
   let scheduled = false;
   let toggleButton = null;
+  let preferredActiveLabel = null;
 
   try {
     const requestedMode = new URLSearchParams(window.location.search).get("mode");
@@ -73,6 +74,7 @@
 
     if (isNav(node)) {
       node.classList.add("hems-desktop-nav");
+      bindNavState(node);
       return;
     }
 
@@ -198,7 +200,7 @@
   }
 
   function syncActiveNav() {
-    const activeLabel = detectActiveLabel();
+    const activeLabel = preferredActiveLabel || detectActiveLabel();
     document.querySelectorAll(".hems-desktop-nav").forEach((nav) => {
       const buttons = Array.from(nav.children).filter((child) => child.tagName === "BUTTON");
       buttons.forEach((button) => button.classList.remove("is-active"));
@@ -210,6 +212,34 @@
         button.classList.toggle("is-active", isActive);
       });
     });
+  }
+
+  function bindNavState(nav) {
+    if (nav.dataset.hemsNavBound === "1") return;
+    nav.dataset.hemsNavBound = "1";
+    nav.addEventListener(
+      "click",
+      (event) => {
+        const button = event.target.closest("button");
+        if (!button || !nav.contains(button)) return;
+        const label = labelFromNavButton(button);
+        if (!label) return;
+        preferredActiveLabel = label;
+        window.requestAnimationFrame(syncActiveNav);
+      },
+      true
+    );
+  }
+
+  function labelFromNavButton(button) {
+    const text = textOf(button);
+    if (text.includes("\u9996\u9875")) return "\u9996\u9875";
+    if (text.includes("\u8bbe\u5907")) return "\u8bbe\u5907";
+    if (text.includes("\u6392\u7a0b")) return "\u6392\u7a0b";
+    if (text.includes("\u8212\u9002\u5ea6")) return "\u8212\u9002\u5ea6";
+    if (text.includes("\u6c7d\u8f66") || text.includes("\u5145\u7535")) return "\u6c7d\u8f66";
+    if (text.includes("\u65e5\u5fd7")) return "\u65e5\u5fd7";
+    return null;
   }
 
   function detectActiveLabel() {
