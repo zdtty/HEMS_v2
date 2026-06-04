@@ -22,7 +22,14 @@
   function isNav(node) {
     if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
     const style = window.getComputedStyle(node);
-    return style.position === "fixed" && node.querySelectorAll("button").length >= 5;
+    const directButtons = Array.from(node.children).filter((child) => child.tagName === "BUTTON");
+    return style.position === "fixed" && directButtons.length >= 5;
+  }
+
+  function isOverlay(node) {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+    const style = window.getComputedStyle(node);
+    return style.position === "fixed" && !isNav(node);
   }
 
   function clearSpanClasses(node) {
@@ -56,12 +63,20 @@
 
   function classifyPanel(node, index) {
     if (!node || node.nodeType !== Node.ELEMENT_NODE) return;
+    if (isOverlay(node)) {
+      node.classList.remove("hems-desktop-nav", "hems-desktop-header", "hems-desktop-panel");
+      clearSpanClasses(node);
+      clearRoleClasses(node);
+      node.classList.add("hems-desktop-modal-overlay");
+      return;
+    }
+
     if (isNav(node)) {
       node.classList.add("hems-desktop-nav");
       return;
     }
 
-    node.classList.remove("hems-desktop-nav", "hems-desktop-header");
+    node.classList.remove("hems-desktop-nav", "hems-desktop-header", "hems-desktop-modal-overlay");
     clearRoleClasses(node);
     const text = textOf(node);
     const className = node.className || "";
@@ -168,6 +183,45 @@
     updateToggle(false);
     app.classList.add("hems-desktop-app");
     Array.from(app.children).forEach(classifyPanel);
+    classifyOverlays(root);
+    syncActiveNav();
+  }
+
+  function classifyOverlays(root) {
+    root.querySelectorAll("div").forEach((node) => {
+      if (!isOverlay(node)) return;
+      node.classList.remove("hems-desktop-nav", "hems-desktop-header", "hems-desktop-panel");
+      clearSpanClasses(node);
+      clearRoleClasses(node);
+      node.classList.add("hems-desktop-modal-overlay");
+    });
+  }
+
+  function syncActiveNav() {
+    const activeLabel = detectActiveLabel();
+    document.querySelectorAll(".hems-desktop-nav").forEach((nav) => {
+      const buttons = Array.from(nav.children).filter((child) => child.tagName === "BUTTON");
+      buttons.forEach((button) => button.classList.remove("is-active"));
+      buttons.forEach((button) => {
+        const text = textOf(button);
+        const isActive =
+          text.includes(activeLabel) ||
+          (activeLabel === "\u6c7d\u8f66" && text.includes("\u5145\u7535"));
+        button.classList.toggle("is-active", isActive);
+      });
+    });
+  }
+
+  function detectActiveLabel() {
+    const root = document.getElementById("root");
+    const text = textOf(root);
+
+    if (text.includes("\u8bbe\u5907\u7ba1\u7406")) return "\u8bbe\u5907";
+    if (text.includes("\u6392\u7a0b") && (text.includes("\u7b56\u7565") || text.includes("\u7eff\u8272\u5bb6\u7535"))) return "\u6392\u7a0b";
+    if (text.includes("\u8212\u9002\u5ea6\u8c03\u8282")) return "\u8212\u9002\u5ea6";
+    if (text.includes("\u7535\u52a8\u6c7d\u8f66\u5145\u7535") && text.includes("\u5145\u7535\u76ee\u6807\u8bbe\u7f6e")) return "\u6c7d\u8f66";
+    if (text.includes("\u51b3\u7b56\u65e5\u5fd7")) return "\u65e5\u5fd7";
+    return "\u9996\u9875";
   }
 
   function schedule() {
