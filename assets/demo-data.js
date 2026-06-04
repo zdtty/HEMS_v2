@@ -203,5 +203,10 @@
     }
   ];
 
+  window.HEMS_DEMO_STATS = {
+    totalSaved: 4.86,
+    totalCarbonG: 730
+  };
+
   window.HEMS_DEMO_DEVICES = demoDevices;
 })();

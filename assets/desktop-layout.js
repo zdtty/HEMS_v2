@@ -254,6 +254,7 @@
     const root = document.getElementById("root");
     const text = textOf(root);
 
+    if (text.includes("\u4eca\u65e5\u8282\u80fd\u6210\u679c") && text.includes("\u8bbe\u5907\u72b6\u6001")) return "\u9996\u9875";
     if (text.includes("\u8bbe\u5907\u7ba1\u7406")) return "\u8bbe\u5907";
     if (text.includes("\u6392\u7a0b") && (text.includes("\u7b56\u7565") || text.includes("\u7eff\u8272\u5bb6\u7535"))) return "\u6392\u7a0b";
     if (text.includes("\u8212\u9002\u5ea6\u8c03\u8282")) return "\u8212\u9002\u5ea6";
