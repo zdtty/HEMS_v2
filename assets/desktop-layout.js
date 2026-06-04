@@ -37,6 +37,18 @@
     );
   }
 
+  function clearRoleClasses(node) {
+    node.classList.remove(
+      "hems-desktop-home-hero",
+      "hems-desktop-home-savings",
+      "hems-desktop-home-alert",
+      "hems-desktop-home-price",
+      "hems-desktop-home-ev",
+      "hems-desktop-home-page",
+      "hems-desktop-ev-page"
+    );
+  }
+
   function addSpan(node, span) {
     clearSpanClasses(node);
     node.classList.add("hems-desktop-panel", `hems-desktop-span-${span}`);
@@ -50,10 +62,11 @@
     }
 
     node.classList.remove("hems-desktop-nav", "hems-desktop-header");
+    clearRoleClasses(node);
     const text = textOf(node);
     const className = node.className || "";
 
-    if (index === 0 || text.includes("家庭能源管家")) {
+    if (index === 0) {
       node.classList.add("hems-desktop-header");
       addSpan(node, 12);
       return;
@@ -74,32 +87,49 @@
       return;
     }
 
-    if (text.includes("欢迎使用")) {
-      addSpan(node, 4);
+    if ((text.includes("欢迎使用") || text.includes("添加第一台设备")) && text.includes("家庭平面孪生")) {
+      node.classList.add("hems-desktop-home-page");
+      addSpan(node, 12);
+      return;
+    }
+
+    if (text.includes("电动汽车充电") && text.includes("充电目标设置")) {
+      node.classList.add("hems-desktop-ev-page");
+      addSpan(node, 12);
+      return;
+    }
+
+    if (text.includes("欢迎使用") || text.includes("添加第一台设备")) {
+      node.classList.add("hems-desktop-home-hero");
+      addSpan(node, 12);
       return;
     }
 
     if (text.includes("今日节能成果")) {
-      addSpan(node, 4);
+      node.classList.add("hems-desktop-home-savings");
+      addSpan(node, 12);
       return;
     }
 
     if (text.includes("明日高温预警")) {
-      addSpan(node, 4);
+      node.classList.add("hems-desktop-home-alert");
+      addSpan(node, 12);
       return;
     }
 
     if (text.includes("今日电价走势")) {
-      addSpan(node, 6);
+      node.classList.add("hems-desktop-home-price");
+      addSpan(node, 12);
       return;
     }
 
     if (text.includes("电动汽车充电")) {
-      addSpan(node, 6);
+      node.classList.add("hems-desktop-home-ev");
+      addSpan(node, 12);
       return;
     }
 
-    if (text.includes("设备") || text.includes("排程") || text.includes("舒适度") || text.includes("运行日志")) {
+    if (text.includes("设备") || text.includes("排程") || text.includes("舒适度") || text.includes("运行日志") || text.includes("决策日志")) {
       addSpan(node, 12);
       return;
     }

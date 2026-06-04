@@ -43,10 +43,10 @@
   .hems-desktop-span-12 { grid-column: 1 / -1 !important; }
 
   .hems-desktop-header {
-    position: sticky !important;
+    position: relative !important;
     top: 0 !important;
     z-index: 20 !important;
-    padding: 8px 4px 4px !important;
+    padding: 8px 4px 0 !important;
     background: transparent !important;
   }
 
@@ -153,6 +153,192 @@
     min-height: 100%;
   }
 
+  .hems-desktop-home-hero {
+    min-height: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .hems-desktop-home-hero > * {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hems-desktop-home-hero > :nth-child(1),
+  .hems-desktop-home-hero > :nth-child(2),
+  .hems-desktop-home-hero > :nth-child(3) {
+    grid-column: span 4 !important;
+    min-height: 220px !important;
+  }
+
+  .hems-desktop-home-hero > :nth-child(4),
+  .hems-desktop-home-hero > :nth-child(5) {
+    grid-column: span 6 !important;
+    min-height: 132px !important;
+  }
+
+  .hems-desktop-home-savings {
+    min-height: 250px !important;
+  }
+
+  .hems-desktop-home-alert,
+  .hems-desktop-home-price {
+    min-height: 144px !important;
+  }
+
+  .hems-desktop-home-ev {
+    min-height: 124px !important;
+  }
+
+  .hems-desktop-home-page {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+
+  .hems-desktop-home-page > * {
+    grid-column: 1 / -1 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hems-desktop-home-page > :first-child {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+  }
+
+  .hems-desktop-home-page > :first-child > * {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hems-desktop-home-page > :first-child > :nth-child(1),
+  .hems-desktop-home-page > :first-child > :nth-child(2),
+  .hems-desktop-home-page > :first-child > :nth-child(3) {
+    grid-column: span 4 !important;
+    min-height: 210px !important;
+  }
+
+  .hems-desktop-home-page > :first-child > :nth-child(4),
+  .hems-desktop-home-page > :first-child > :nth-child(5) {
+    grid-column: span 6 !important;
+    min-height: 132px !important;
+  }
+
+  .hems-desktop-home-page > :not(:first-child) {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+
+  .hems-desktop-home-page .hems-live-energy {
+    grid-column: span 5 !important;
+  }
+
+  .hems-desktop-home-page .hems-twin {
+    grid-column: span 7 !important;
+  }
+
+  .hems-desktop-home-page .hems-twin {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr) !important;
+    column-gap: 18px !important;
+    align-items: start !important;
+  }
+
+  .hems-desktop-home-page .hems-twin__head {
+    grid-column: 1 / -1 !important;
+  }
+
+  .hems-desktop-home-page .hems-twin__map,
+  .hems-desktop-home-page .hems-twin__add-room {
+    grid-column: 1 !important;
+  }
+
+  .hems-desktop-home-page .hems-twin__detail {
+    grid-column: 2 !important;
+    grid-row: 2 / span 2 !important;
+    margin-top: 0 !important;
+    padding-left: 18px !important;
+    border-left: 1px solid rgba(148, 163, 184, 0.28) !important;
+  }
+
+  .hems-desktop-home-page .hems-twin__metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hems-desktop-home-page .hems-twin__actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hems-desktop-ev-page {
+    width: auto !important;
+    max-width: none !important;
+    margin: -92px 0 0 !important;
+    padding-top: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+
+  .hems-desktop-ev-page > * {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(1) {
+    grid-column: 1 / -1 !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(2),
+  .hems-desktop-ev-page > :nth-child(5),
+  .hems-desktop-ev-page > :nth-child(6) {
+    grid-column: span 5 !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(3),
+  .hems-desktop-ev-page > :nth-child(4) {
+    grid-column: span 7 !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(2),
+  .hems-desktop-ev-page > :nth-child(3) {
+    min-height: 260px !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(2) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .hems-desktop-ev-page > :nth-child(n+7) {
+    grid-column: 1 / -1 !important;
+  }
+
   .hems-live-energy__grid {
     grid-template-columns: 1fr !important;
   }
@@ -163,6 +349,35 @@
 
   .hems-twin {
     margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr) !important;
+    column-gap: 18px !important;
+    align-items: start !important;
+  }
+
+  .hems-twin__head {
+    grid-column: 1 / -1 !important;
+  }
+
+  .hems-twin__map,
+  .hems-twin__add-room {
+    grid-column: 1 !important;
+  }
+
+  .hems-twin__detail {
+    grid-column: 2 !important;
+    grid-row: 2 / span 2 !important;
+    margin-top: 0 !important;
+    padding-left: 18px !important;
+    border-left: 1px solid rgba(148, 163, 184, 0.28) !important;
+  }
+
+  .hems-twin__metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hems-twin__actions {
+    grid-template-columns: 1fr !important;
   }
 
   .hems-twin__map {
