@@ -164,11 +164,19 @@
 
     if (!mq.matches || forceMobile) {
       app.classList.remove("hems-desktop-app");
-      document.querySelectorAll(".hems-desktop-panel,.hems-desktop-nav,.hems-desktop-header").forEach((node) => {
+      document.querySelectorAll(".hems-desktop-panel,.hems-desktop-nav,.hems-desktop-header,.hems-desktop-modal-overlay,.hems-desktop-home-page,.hems-desktop-home-hero,.hems-desktop-home-savings,.hems-desktop-home-alert,.hems-desktop-home-price,.hems-desktop-home-ev,.hems-desktop-ev-page").forEach((node) => {
         node.classList.remove(
           "hems-desktop-panel",
           "hems-desktop-nav",
           "hems-desktop-header",
+          "hems-desktop-modal-overlay",
+          "hems-desktop-home-page",
+          "hems-desktop-home-hero",
+          "hems-desktop-home-savings",
+          "hems-desktop-home-alert",
+          "hems-desktop-home-price",
+          "hems-desktop-home-ev",
+          "hems-desktop-ev-page",
           "hems-desktop-span-3",
           "hems-desktop-span-4",
           "hems-desktop-span-5",

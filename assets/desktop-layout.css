@@ -368,7 +368,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 
-  .hems-twin {
+  .hems-desktop-app .hems-twin {
     margin: 0 !important;
     display: grid !important;
     grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr) !important;
@@ -376,16 +376,16 @@
     align-items: start !important;
   }
 
-  .hems-twin__head {
+  .hems-desktop-app .hems-twin__head {
     grid-column: 1 / -1 !important;
   }
 
-  .hems-twin__map,
-  .hems-twin__add-room {
+  .hems-desktop-app .hems-twin__map,
+  .hems-desktop-app .hems-twin__add-room {
     grid-column: 1 !important;
   }
 
-  .hems-twin__detail {
+  .hems-desktop-app .hems-twin__detail {
     grid-column: 2 !important;
     grid-row: 2 / span 2 !important;
     margin-top: 0 !important;
@@ -393,32 +393,32 @@
     border-left: 1px solid rgba(148, 163, 184, 0.28) !important;
   }
 
-  .hems-twin__metrics {
+  .hems-desktop-app .hems-twin__metrics {
     grid-template-columns: 1fr !important;
   }
 
-  .hems-twin__actions {
+  .hems-desktop-app .hems-twin__actions {
     grid-template-columns: 1fr !important;
   }
 
-  .hems-twin__map {
+  .hems-desktop-app .hems-twin__map {
     grid-template-rows: repeat(5, 62px) !important;
     grid-auto-rows: 62px !important;
   }
 
-  .hems-room {
+  .hems-desktop-app .hems-room {
     padding: 10px !important;
   }
 
-  .hems-room__name {
+  .hems-desktop-app .hems-room__name {
     font-size: 13px !important;
   }
 
-  .hems-room__power {
+  .hems-desktop-app .hems-room__power {
     font-size: 16px !important;
   }
 
-  .hems-twin__metrics {
+  .hems-desktop-app .hems-twin__metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
