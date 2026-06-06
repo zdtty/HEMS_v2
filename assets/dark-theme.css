@@ -19,8 +19,8 @@
 
   /* Text */
   --dt-text-primary: #F0F0F5;
-  --dt-text-secondary: #8B8BA3;
-  --dt-text-tertiary: #55556A;
+  --dt-text-secondary: #A0A0B8;
+  --dt-text-tertiary: #6E6E8A;
 
   /* Energy accent */
   --dt-accent-green: #00D68F;
@@ -760,6 +760,26 @@ html.hems-dark #root > div [style*="color: rgb(110, 110, 115)"] {
 
 html.hems-dark #root > div [style*="color: rgb(29, 29, 31)"] {
   color: var(--dt-text-primary) !important;
+}
+
+/* Fix for very dark text that becomes invisible on dark background */
+html.hems-dark #root > div [style*="color: rgb(0, 0, 0)"],
+html.hems-dark #root > div [style*="color: rgb(0,0,0)"],
+html.hems-dark #root > div [style*="color: #000"],
+html.hems-dark #root > div [style*="color:#000"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* Fix for dark gray text */
+html.hems-dark #root > div [style*="color: rgb(60, 60, 67)"],
+html.hems-dark #root > div [style*="color: rgb(60,60,67)"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* Fix for medium gray text */
+html.hems-dark #root > div [style*="color: rgb(120, 120, 128)"],
+html.hems-dark #root > div [style*="color: rgb(120,120,128)"] {
+  color: var(--dt-text-secondary) !important;
 }
 
 /* All remaining 9px/10px text */
