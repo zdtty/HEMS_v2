@@ -159,6 +159,9 @@
     const app = root && root.firstElementChild;
     if (!app) return;
 
+    // 保存当前滚动位置，防止布局重排导致页面自动滚动
+    const scrollY = window.scrollY;
+
     const forceMobile = localStorage.getItem(modeKey) === "mobile";
     document.documentElement.classList.toggle("hems-force-mobile", forceMobile);
 
@@ -195,6 +198,14 @@
     Array.from(app.children).forEach(classifyPanel);
     classifyOverlays(root);
     syncActiveNav();
+
+    // 恢复滚动位置，防止布局重排导致页面跳动
+    if (window.scrollY !== scrollY) {
+      window.scrollTo(0, scrollY);
+    }
+
+    // 通知其他脚本布局已完成（用于触发动画）
+    window.dispatchEvent(new CustomEvent('hems-layout-applied'));
   }
 
   function classifyOverlays(root) {

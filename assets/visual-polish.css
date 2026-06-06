@@ -1,0 +1,277 @@
+/* ============================================================
+   visual-polish.css — HEMS v2 视觉增强层
+   覆盖式增强，不修改原始样式文件
+   ============================================================ */
+
+/* ---------- 1. 全局基础 ---------- */
+/* 注意：不设置 scroll-behavior: smooth，避免与布局重排冲突导致自动滚动 */
+
+/* ---------- 2. 电价柱状图透明度修复 ---------- */
+/* 当前时段柱子高亮，非当前柱子适度透明 */
+#root > div [style*="opacity: 0.3"][style*="border-radius: 3px"] {
+  opacity: 0.55 !important;
+  transition: opacity 0.3s ease;
+}
+
+#root > div [style*="opacity: 0.3"][style*="border-radius: 3px"]:hover {
+  opacity: 0.85 !important;
+}
+
+/* 当前时段指示器下方柱子（含 ▼ 标记）保持全不透明 */
+#root > div [style*="opacity: 1"][style*="border-radius: 3px"] {
+  opacity: 1 !important;
+}
+
+/* ---------- 3. 最小字号提升（桌面端） ---------- */
+@media (min-width: 900px) {
+  /* 所有 9px 辅助文字提升到 11px */
+  [style*="font-size: 9px"],
+  [style*="font-size:9px"] {
+    font-size: 11px !important;
+  }
+
+  /* 10px 提升到 11px */
+  [style*="font-size: 10px"],
+  [style*="font-size:10px"] {
+    font-size: 11px !important;
+  }
+
+  /* live-energy 和 twin 中的小字号 */
+  .hems-live-energy__metric-label,
+  .hems-live-energy__mix-sub,
+  .hems-live-energy__legend-item,
+  .hems-live-energy__source,
+  .hems-twin__metric-label,
+  .hems-twin__score-label,
+  .hems-twin__room-note,
+  .hems-twin__device,
+  .hems-twin__empty,
+  .hems-api__meta {
+    font-size: 11px !important;
+  }
+}
+
+/* ---------- 4. 卡片视觉层次增强 ---------- */
+/* 核心数据卡片（实时功率、节能成果）添加微妙渐变 */
+#root > div > div:nth-child(2) > div:nth-child(1),
+#root > div > div:nth-child(2) > div:nth-child(2) {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 实时功率卡片 — 蓝色微光 */
+#root > div > div:nth-child(2) > div:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(10, 132, 255, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* 运行设备卡片 — 绿色微光 */
+#root > div > div:nth-child(2) > div:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(48, 184, 97, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* 节能成果卡片 — 顶部渐变装饰条 */
+#root > div [style*="font-size: 13px"][style*="font-weight: 700"] {
+  /* section title already styled */
+}
+
+/* ---------- 5. 按钮悬停效果增强 ---------- */
+@media (min-width: 900px) {
+  /* 查看全部、详情等辅助按钮 */
+  button[style*="background: rgb(242, 242, 247)"],
+  button[style*="background:rgb(242, 242, 247)"] {
+    transition: all 0.2s ease !important;
+  }
+
+  button[style*="background: rgb(242, 242, 247)"]:hover,
+  button[style*="background:rgb(242, 242, 247)"]:hover {
+    background: rgb(232, 236, 241) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  /* 主色按钮（+ 添加按钮）*/
+  button[style*="background: rgb(10, 132, 255)"],
+  button[style*="background:rgb(10, 132, 255)"] {
+    transition: all 0.2s ease !important;
+  }
+
+  button[style*="background: rgb(10, 132, 255)"]:hover,
+  button[style*="background:rgb(10, 132, 255)"]:hover {
+    background: rgb(8, 118, 230) !important;
+    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* 卡片式按钮 hover */
+  [style*="background: rgba(48, 184, 97"],
+  [style*="background:rgba(48, 184, 97"] {
+    transition: all 0.2s ease !important;
+    cursor: pointer;
+  }
+
+  [style*="background: rgba(48, 184, 97"]:hover,
+  [style*="background:rgba(48, 184, 97"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(48, 184, 97, 0.15);
+  }
+
+  [style*="background: rgba(245, 166, 35"],
+  [style*="background:rgba(245, 166, 35"] {
+    transition: all 0.2s ease !important;
+    cursor: pointer;
+  }
+
+  [style*="background: rgba(245, 166, 35"]:hover,
+  [style*="background:rgba(245, 166, 35"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(245, 166, 35, 0.15);
+  }
+}
+
+/* ---------- 6. 设备页按钮优化 ---------- */
+@media (min-width: 900px) {
+  /* 设备列表项 hover 效果 */
+  [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"][style*="padding: 6px"] {
+    border-radius: 12px;
+    padding: 8px 12px !important;
+    transition: background 0.15s ease;
+  }
+
+  [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"][style*="padding: 6px"]:hover {
+    background: rgba(10, 132, 255, 0.03);
+  }
+
+  /* 停止/移除按钮更紧凑 */
+  [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"] button[style*="font-size: 11px"] {
+    min-width: auto;
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+
+  [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"] button[style*="font-size: 11px"]:hover {
+    opacity: 1;
+  }
+}
+
+/* ---------- 7. 进度条动画 ---------- */
+[style*="transition: width 0.5s"] {
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ---------- 8. 侧边栏导航增强 ---------- */
+@media (min-width: 900px) {
+  .hems-desktop-nav button {
+    transition: all 0.2s ease !important;
+  }
+
+  .hems-desktop-nav button:hover {
+    background: #f0f5ff !important;
+    transform: scale(1.02);
+  }
+
+  /* 选中态更明显 */
+  .hems-desktop-nav button.is-active {
+    background: linear-gradient(180deg, #e8f2ff, #ffffff) !important;
+    box-shadow: inset 0 0 0 1.5px rgba(10, 132, 255, 0.15),
+                0 2px 8px rgba(10, 132, 255, 0.08) !important;
+  }
+
+  .hems-desktop-nav button.is-active::before {
+    background: linear-gradient(180deg, #0a84ff, #0066cc) !important;
+    box-shadow: 0 0 8px rgba(10, 132, 255, 0.3);
+  }
+}
+
+/* ---------- 9. 卡片入场动画 ---------- */
+/* 注意：入场动画已移至 dark-theme.js 的 animateEntrance() 统一控制
+   深色和浅色模式均通过 JS 驱动，确保一致性 */
+
+/* ---------- 10. 高温预警卡片增强 ---------- */
+[style*="border-left: 3px solid rgb(245, 166, 35)"],
+[style*="border-left:3px solid rgb(245, 166, 35)"] {
+  border-left-width: 4px !important;
+  border-image: linear-gradient(180deg, #f5a623, #ff8c00) 1 !important;
+}
+
+/* ---------- 11. 切换按钮美化 ---------- */
+.hems-layout-toggle {
+  transition: all 0.2s ease !important;
+}
+
+.hems-layout-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(15, 71, 130, 0.15) !important;
+}
+
+/* ---------- 12. 数字等宽字体优化 ---------- */
+[style*="font-variant-numeric: tabular-nums"],
+[style*="font-variant-numeric:tabular-nums"] {
+  font-feature-settings: "tnum" 1, "kern" 1;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- 13. 节能成果区域分隔线优化 ---------- */
+[style*="border-left: 1px solid rgb(232, 236, 241)"],
+[style*="border-left:1px solid rgb(232, 236, 241)"] {
+  border-left-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+/* ---------- 14. 模态框增强 ---------- */
+@media (min-width: 900px) {
+  .hems-desktop-modal-overlay {
+    backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.3) !important;
+  }
+
+  .hems-desktop-modal-overlay > div {
+    animation: hems-modal-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes hems-modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+}
+
+/* ---------- 15. 滚动条美化 ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}

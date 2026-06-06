@@ -296,6 +296,9 @@
     const app = root && root.firstElementChild;
     if (!app) return;
 
+    // 保存滚动位置，防止 DOM 插入导致页面跳动
+    const scrollY = window.scrollY;
+
     const panel = existing || document.createElement("section");
     const signature = JSON.stringify({
       city: selectedCity.id,
@@ -329,6 +332,11 @@
         if (anchor && anchor.parentNode === app) anchor.insertAdjacentElement("afterend", panel);
         else app.insertBefore(panel, fixedNav || null);
       }
+    }
+
+    // 恢复滚动位置
+    if (window.scrollY !== scrollY) {
+      window.scrollTo(0, scrollY);
     }
   }
 

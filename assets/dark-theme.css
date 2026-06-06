@@ -1,0 +1,809 @@
+/* ============================================================
+   dark-theme.css — HEMS v2 "午夜极光" 深色主题
+   覆盖式增强层，不修改原始样式文件
+   ============================================================ */
+
+/* ---------- 0. Design Tokens (CSS Variables) ---------- */
+:root {
+  /* Background layers */
+  --dt-bg-primary: #0A0A0F;
+  --dt-bg-secondary: #12121A;
+  --dt-bg-elevated: #1A1A25;
+  --dt-bg-hover: #22222F;
+  --dt-bg-input: #16161F;
+
+  /* Borders */
+  --dt-border-subtle: rgba(255,255,255,0.06);
+  --dt-border-default: rgba(255,255,255,0.10);
+  --dt-border-strong: rgba(255,255,255,0.16);
+
+  /* Text */
+  --dt-text-primary: #F0F0F5;
+  --dt-text-secondary: #8B8BA3;
+  --dt-text-tertiary: #55556A;
+
+  /* Energy accent */
+  --dt-accent-green: #00D68F;
+  --dt-accent-blue: #3B82F6;
+  --dt-accent-amber: #F59E0B;
+  --dt-accent-red: #EF4444;
+  --dt-accent-purple: #8B5CF6;
+
+  /* Gradients */
+  --dt-gradient-energy: linear-gradient(135deg, #00D68F, #3B82F6);
+  --dt-gradient-alert: linear-gradient(135deg, #F59E0B, #EF4444);
+
+  /* Shadows */
+  --dt-shadow-card: 0 0 0 1px var(--dt-border-subtle);
+  --dt-shadow-elevated: 0 8px 32px rgba(0,0,0,0.3);
+  --dt-shadow-glow-green: 0 0 20px rgba(0,214,143,0.15);
+  --dt-shadow-glow-blue: 0 0 20px rgba(59,130,246,0.15);
+  --dt-shadow-glow-amber: 0 0 20px rgba(245,158,11,0.15);
+  --dt-shadow-glow-purple: 0 0 20px rgba(139,92,246,0.15);
+
+  /* Radius */
+  --dt-radius-sm: 6px;
+  --dt-radius-md: 12px;
+  --dt-radius-lg: 16px;
+  --dt-radius-xl: 24px;
+
+  /* Font */
+  --dt-font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+  --dt-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* ---------- 1. Global Base Override ---------- */
+html.hems-dark {
+  background: var(--dt-bg-primary) !important;
+  color-scheme: dark;
+}
+
+html.hems-dark body {
+  background: var(--dt-bg-primary) !important;
+  color: var(--dt-text-primary) !important;
+  font-family: var(--dt-font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- 2. App Container ---------- */
+html.hems-dark #root > div {
+  background: var(--dt-bg-primary) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- 3. Header ---------- */
+html.hems-dark #root > div > div:first-child {
+  background: transparent !important;
+  border-bottom-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark #root > div > div:first-child [style*="font-size: 20px"],
+html.hems-dark #root > div > div:first-child [style*="font-size:20px"] {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark #root > div > div:first-child [style*="font-size: 11px"],
+html.hems-dark #root > div > div:first-child [style*="font-size:11px"] {
+  color: var(--dt-text-tertiary) !important;
+}
+
+/* Header + button (blue circle) */
+html.hems-dark #root > div > div:first-child button[style*="background: rgb(10, 132, 255)"],
+html.hems-dark #root > div > div:first-child button[style*="background:rgb(10, 132, 255)"] {
+  background: var(--dt-accent-blue) !important;
+  box-shadow: var(--dt-shadow-glow-blue) !important;
+}
+
+/* ---------- 4. KPI Cards (2x2 grid) ---------- */
+html.hems-dark #root > div > div:nth-child(2) > div {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-radius: var(--dt-radius-lg) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+html.hems-dark #root > div > div:nth-child(2) > div:hover {
+  border-color: var(--dt-border-default) !important;
+  box-shadow: var(--dt-shadow-card), 0 4px 16px rgba(0,0,0,0.2) !important;
+  transform: translateY(-2px);
+}
+
+/* KPI label text */
+html.hems-dark #root > div > div:nth-child(2) [style*="font-size: 11px"],
+html.hems-dark #root > div > div:nth-child(2) [style*="font-size:11px"] {
+  color: var(--dt-text-secondary) !important;
+}
+
+/* KPI value: real-time power (blue) */
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(1) [style*="font-size: 22px"],
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(1) [style*="font-size:22px"] {
+  color: var(--dt-accent-blue) !important;
+  font-family: var(--dt-font-mono) !important;
+  text-shadow: 0 0 20px rgba(59,130,246,0.3);
+}
+
+/* KPI value: running devices (green) */
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(2) [style*="font-size: 22px"],
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(2) [style*="font-size:22px"] {
+  color: var(--dt-accent-green) !important;
+  font-family: var(--dt-font-mono) !important;
+  text-shadow: 0 0 20px rgba(0,214,143,0.3);
+}
+
+/* KPI value: scheduled (amber) */
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(3) [style*="font-size: 22px"],
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(3) [style*="font-size:22px"] {
+  color: var(--dt-accent-amber) !important;
+  font-family: var(--dt-font-mono) !important;
+  text-shadow: 0 0 20px rgba(245,158,11,0.3);
+}
+
+/* KPI value: carbon intensity (lime green) */
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(4) [style*="font-size: 22px"],
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(4) [style*="font-size:22px"] {
+  color: var(--dt-accent-green) !important;
+  font-family: var(--dt-font-mono) !important;
+  text-shadow: 0 0 20px rgba(0,214,143,0.3);
+}
+
+/* KPI unit text */
+html.hems-dark #root > div > div:nth-child(2) [style*="font-size: 12px"],
+html.hems-dark #root > div > div:nth-child(2) [style*="font-size:12px"] {
+  color: var(--dt-text-tertiary) !important;
+}
+
+/* KPI card glow decorations */
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+html.hems-dark #root > div > div:nth-child(2) > div:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,214,143,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- 5. Savings Card ---------- */
+html.hems-dark #root > div [style*="font-size: 13px"][style*="font-weight: 700"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* Savings card container */
+html.hems-dark #root > div div[style*="border-left: 3px solid rgb(245, 166, 35)"],
+html.hems-dark #root > div div[style*="border-left:3px solid rgb(245, 166, 35)"] {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-left: 3px solid var(--dt-accent-amber) !important;
+  border-radius: var(--dt-radius-lg) !important;
+}
+
+/* All generic white cards */
+html.hems-dark #root > div div[style*="background: rgb(255, 255, 255)"],
+html.hems-dark #root > div div[style*="background:rgb(255, 255, 255)"] {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-radius: var(--dt-radius-lg) !important;
+}
+
+/* Card section titles */
+html.hems-dark #root > div [style*="font-size: 13px"][style*="font-weight: 600"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* ---------- 6. Savings Metrics ---------- */
+/* Savings amount (green) */
+html.hems-dark #root > div [style*="font-size: 22px"][style*="font-weight: 700"][style*="color: rgb(48, 184, 97)"],
+html.hems-dark #root > div [style*="color: rgb(48, 184, 97)"][style*="font-size: 22px"] {
+  color: var(--dt-accent-green) !important;
+  font-family: var(--dt-font-mono) !important;
+  text-shadow: 0 0 16px rgba(0,214,143,0.25);
+}
+
+/* CO2 (lime) */
+html.hems-dark #root > div [style*="color: rgb(138, 201, 38)"] {
+  color: var(--dt-accent-green) !important;
+}
+
+/* AI commands (purple) */
+html.hems-dark #root > div [style*="color: rgb(155, 89, 182)"] {
+  color: var(--dt-accent-purple) !important;
+}
+
+/* Savings sub-labels */
+html.hems-dark #root > div [style*="font-size: 9px"] {
+  color: var(--dt-text-tertiary) !important;
+  font-size: 11px !important;
+}
+
+/* Savings divider lines */
+html.hems-dark #root > div [style*="border-left: 1px solid rgb(232, 236, 241)"] {
+  border-left-color: var(--dt-border-default) !important;
+}
+
+/* ---------- 7. Progress Bar ---------- */
+html.hems-dark #root > div [style*="background: rgb(242, 242, 247)"][style*="border-radius: 6px"][style*="height: 6px"] {
+  background: var(--dt-bg-elevated) !important;
+}
+
+html.hems-dark #root > div [style*="background: linear-gradient(90deg"] {
+  background: linear-gradient(90deg, var(--dt-accent-green), var(--dt-accent-blue)) !important;
+}
+
+/* Progress label */
+html.hems-dark #root > div [style*="font-size: 10px"][style*="color: rgb(138, 201, 38)"] {
+  color: var(--dt-accent-green) !important;
+}
+
+/* ---------- 8. Price Chart ---------- */
+/* Price chart container */
+html.hems-dark #root > div [style*="display: flex"][style*="gap: 1.5px"][style*="height: 44px"] {
+  /* bars container */
+}
+
+/* Price bars: non-current */
+html.hems-dark #root > div div[style*="flex: 1"][style*="border-radius: 3px 3px 0px 0px"] {
+  opacity: 0.5 !important;
+  transition: opacity 0.3s ease, transform 0.2s ease !important;
+}
+
+html.hems-dark #root > div div[style*="flex: 1"][style*="border-radius: 3px 3px 0px 0px"]:hover {
+  opacity: 0.8 !important;
+  transform: scaleY(1.05);
+  transform-origin: bottom;
+}
+
+/* Current bar */
+html.hems-dark #root > div div[style*="flex: 1"][style*="border-radius: 3px 3px 0px 0px"][style*="opacity: 1"] {
+  opacity: 1 !important;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
+}
+
+/* Price time labels */
+html.hems-dark #root > div [style*="font-size: 9px"][style*="color: rgb(174, 174, 178)"] {
+  color: var(--dt-text-tertiary) !important;
+  font-size: 10px !important;
+}
+
+/* Current price label */
+html.hems-dark #root > div [style*="color: rgb(52, 211, 153)"] {
+  color: var(--dt-accent-green) !important;
+}
+
+/* ---------- 9. Device Status Section ---------- */
+/* Device list items */
+html.hems-dark #root > div [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"][style*="padding: 6px"] {
+  border-radius: var(--dt-radius-md) !important;
+  transition: background 0.2s ease !important;
+}
+
+html.hems-dark #root > div [style*="display: flex"][style*="align-items: center"][style*="justify-content: space-between"][style*="padding: 6px"]:hover {
+  background: rgba(255,255,255,0.03) !important;
+}
+
+/* Device icon backgrounds */
+html.hems-dark #root > div [style*="border-radius: 10px"][style*="background: rgba(48, 184, 97"] {
+  background: rgba(0,214,143,0.1) !important;
+}
+
+/* Device names */
+html.hems-dark #root > div [style*="font-size: 13px"][style*="font-weight: 600"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* Device sub-info */
+html.hems-dark #root > div [style*="font-size: 10px"][style*="color: rgb(174, 174, 178)"] {
+  color: var(--dt-text-tertiary) !important;
+}
+
+/* Device power value (blue) */
+html.hems-dark #root > div [style*="color: rgb(10, 132, 255)"][style*="font-size: 13px"] {
+  color: var(--dt-accent-blue) !important;
+  font-family: var(--dt-font-mono) !important;
+}
+
+/* "View all" button */
+html.hems-dark #root > div button[style*="background: rgb(242, 242, 247)"] {
+  background: var(--dt-bg-elevated) !important;
+  color: var(--dt-text-secondary) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+}
+
+html.hems-dark #root > div button[style*="background: rgb(242, 242, 247)"]:hover {
+  background: var(--dt-bg-hover) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+/* ---------- 10. Alert Card ---------- */
+html.hems-dark #root > div div[style*="border-left: 3px solid"] {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-left: 3px solid var(--dt-accent-amber) !important;
+}
+
+/* Alert title */
+html.hems-dark #root > div [style*="font-size: 13px"][style*="font-weight: 700"]:not([style*="font-weight: 600"]) {
+  color: var(--dt-text-primary) !important;
+}
+
+/* Alert body text */
+html.hems-dark #root > div [style*="font-size: 12px"][style*="color: rgb(110, 110, 115)"] {
+  color: var(--dt-text-secondary) !important;
+}
+
+/* Alert strategy tag */
+html.hems-dark #root > div [style*="background: rgba(245, 166, 35, 0.07)"] {
+  background: rgba(245,158,11,0.12) !important;
+  color: var(--dt-accent-amber) !important;
+}
+
+/* Alert info chips */
+html.hems-dark #root > div [style*="background: rgba(48, 184, 97, 0.07)"] {
+  background: rgba(0,214,143,0.1) !important;
+  color: var(--dt-accent-green) !important;
+}
+
+html.hems-dark #root > div [style*="background: rgba(245, 166, 35, 0.07)"]:not([style*="border-radius: 10px"]) {
+  background: rgba(245,158,11,0.1) !important;
+  color: var(--dt-accent-amber) !important;
+}
+
+/* ---------- 11. Digital Twin (Room Map) ---------- */
+html.hems-dark .hems-twin {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-radius: var(--dt-radius-lg) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-twin__map {
+  background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    var(--dt-bg-elevated) !important;
+  border-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark .hems-room {
+  background: linear-gradient(145deg, rgba(255,255,255,0.04), var(--dt-bg-secondary) 72%) !important;
+  border-color: var(--dt-border-default) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-room__name {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-room__meta {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-twin__detail {
+  background: var(--dt-bg-elevated) !important;
+  border-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark .hems-twin__room-title {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-twin__room-note {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-twin__metric {
+  background: var(--dt-bg-secondary) !important;
+  border-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark .hems-twin__metric-label {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-twin__metric-value {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-twin__input {
+  background: var(--dt-bg-input) !important;
+  border-color: var(--dt-border-default) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-twin__input:focus {
+  border-color: var(--dt-accent-blue) !important;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15) !important;
+}
+
+html.hems-dark .hems-twin__primary {
+  background: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-twin__tool {
+  background: var(--dt-bg-elevated) !important;
+  border-color: var(--dt-border-default) !important;
+  color: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-twin__action {
+  background: var(--dt-bg-elevated) !important;
+  color: var(--dt-accent-blue) !important;
+  border-color: var(--dt-border-default) !important;
+}
+
+html.hems-dark .hems-twin__danger {
+  background: rgba(239,68,68,0.08) !important;
+  border-color: rgba(239,68,68,0.2) !important;
+  color: var(--dt-accent-red) !important;
+}
+
+html.hems-dark .hems-twin__device {
+  background: var(--dt-bg-secondary) !important;
+  border-color: var(--dt-border-default) !important;
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark .hems-twin__advice {
+  background: rgba(0,214,143,0.08) !important;
+  color: var(--dt-accent-green) !important;
+  border-color: rgba(0,214,143,0.15) !important;
+}
+
+html.hems-dark .hems-twin__section-title {
+  color: var(--dt-text-secondary) !important;
+}
+
+/* ---------- 12. Live Energy Panel ---------- */
+html.hems-dark .hems-live-energy {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border: 1px solid var(--dt-border-subtle) !important;
+  border-radius: var(--dt-radius-lg) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-live-energy__title {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-live-energy__meta {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-live-energy__city-button {
+  background: rgba(59,130,246,0.1) !important;
+  border-color: rgba(59,130,246,0.2) !important;
+  color: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-live-energy__weather,
+html.hems-dark .hems-live-energy__mix {
+  background: var(--dt-bg-elevated) !important;
+  border-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark .hems-live-energy__temp {
+  color: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-live-energy__condition {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-live-energy__details {
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark .hems-live-energy__metric {
+  background: var(--dt-bg-secondary) !important;
+  border-color: var(--dt-border-subtle) !important;
+}
+
+html.hems-dark .hems-live-energy__metric-label {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-live-energy__metric-value {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-live-energy__mix-title {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-live-energy__mix-sub {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark .hems-live-energy__green-score {
+  color: var(--dt-accent-green) !important;
+  text-shadow: 0 0 16px rgba(0,214,143,0.25);
+}
+
+html.hems-dark .hems-live-energy__legend-item {
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark .hems-live-energy__advice {
+  background: rgba(59,130,246,0.08) !important;
+  border-color: rgba(59,130,246,0.15) !important;
+  color: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-live-energy__city {
+  background: var(--dt-bg-secondary) !important;
+  border-color: var(--dt-border-default) !important;
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark .hems-live-energy__city.is-active {
+  border-color: var(--dt-accent-blue) !important;
+  background: rgba(59,130,246,0.1) !important;
+  color: var(--dt-accent-blue) !important;
+}
+
+html.hems-dark .hems-live-energy__source {
+  color: var(--dt-text-tertiary) !important;
+}
+
+/* ---------- 13. API Bridge ---------- */
+html.hems-dark .hems-api {
+  background: var(--dt-bg-secondary) !important;
+  box-shadow: var(--dt-shadow-card) !important;
+  border-color: var(--dt-border-subtle) !important;
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-api__title {
+  color: var(--dt-text-primary) !important;
+}
+
+html.hems-dark .hems-api__status {
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark .hems-api__meta {
+  color: var(--dt-text-tertiary) !important;
+}
+
+/* ---------- 14. Desktop Layout Overrides ---------- */
+@media (min-width: 900px) {
+  html.hems-dark body {
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 0%, rgba(0,214,143,0.04) 0%, transparent 50%),
+      var(--dt-bg-primary) !important;
+  }
+
+  /* Sidebar nav */
+  html.hems-dark .hems-desktop-nav {
+    background: rgba(18,18,26,0.85) !important;
+    border-color: var(--dt-border-default) !important;
+    box-shadow: 0 18px 48px rgba(0,0,0,0.4) !important;
+    backdrop-filter: blur(20px) !important;
+  }
+
+  html.hems-dark .hems-desktop-nav button {
+    color: var(--dt-text-secondary) !important;
+  }
+
+  html.hems-dark .hems-desktop-nav button:hover {
+    background: rgba(255,255,255,0.05) !important;
+    color: var(--dt-text-primary) !important;
+  }
+
+  html.hems-dark .hems-desktop-nav button.is-active {
+    background: rgba(59,130,246,0.1) !important;
+    color: var(--dt-accent-blue) !important;
+    box-shadow: inset 0 0 0 1px rgba(59,130,246,0.15) !important;
+  }
+
+  html.hems-dark .hems-desktop-nav button.is-active::before {
+    background: var(--dt-accent-blue) !important;
+    box-shadow: 0 0 10px rgba(59,130,246,0.4);
+  }
+
+  /* Layout toggle */
+  html.hems-dark .hems-layout-toggle {
+    background: var(--dt-bg-secondary) !important;
+    border-color: var(--dt-border-default) !important;
+    color: var(--dt-accent-blue) !important;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.3) !important;
+  }
+
+  /* Modal overlay */
+  html.hems-dark .hems-desktop-modal-overlay {
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(12px);
+  }
+
+  html.hems-dark .hems-desktop-modal-overlay > div {
+    background: var(--dt-bg-elevated) !important;
+    box-shadow: 0 28px 80px rgba(0,0,0,0.5) !important;
+    border: 1px solid var(--dt-border-default) !important;
+  }
+
+  /* Home hero grid */
+  html.hems-dark .hems-desktop-home-hero > :nth-child(1),
+  html.hems-dark .hems-desktop-home-hero > :nth-child(2),
+  html.hems-dark .hems-desktop-home-hero > :nth-child(3) {
+    min-height: 200px !important;
+  }
+
+  /* EV page */
+  html.hems-dark .hems-desktop-ev-page > :nth-child(2),
+  html.hems-dark .hems-desktop-ev-page > :nth-child(3) {
+    min-height: 240px !important;
+  }
+}
+
+/* ---------- 15. Animations ---------- */
+
+/* 卡片入场动画 - 通过 CSS @keyframes 驱动，避免 transition 起点/终点问题 */
+@keyframes hems-panel-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hems-panel-animate {
+  opacity: 0 !important;
+  animation: hems-panel-fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.hems-panel-animate.d1 { animation-delay: 0s !important; }
+.hems-panel-animate.d2 { animation-delay: 0.06s !important; }
+.hems-panel-animate.d3 { animation-delay: 0.12s !important; }
+.hems-panel-animate.d4 { animation-delay: 0.18s !important; }
+.hems-panel-animate.d5 { animation-delay: 0.24s !important; }
+.hems-panel-animate.d6 { animation-delay: 0.30s !important; }
+.hems-panel-animate.d7 { animation-delay: 0.36s !important; }
+.hems-panel-animate.d8 { animation-delay: 0.42s !important; }
+
+@keyframes dt-pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,214,143,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(0,214,143,0); }
+}
+
+@keyframes dt-pulse-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(59,130,246,0); }
+}
+
+@keyframes dt-glow-breathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ---------- 16. Scrollbar ---------- */
+html.hems-dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html.hems-dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html.hems-dark ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+}
+
+html.hems-dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ---------- 17. Icon Polish Overrides ---------- */
+html.hems-dark .hems-line-icon.is-premium {
+  background:
+    radial-gradient(circle at 70% 18%, rgba(255,255,255,0.15), transparent 22%),
+    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02) 78%) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.1) !important;
+}
+
+html.hems-dark .hems-line-icon.is-green {
+  --hems-icon-primary: var(--dt-accent-green);
+  --hems-icon-accent: #5EFFC0;
+  --hems-icon-bg: rgba(0,214,143,0.1);
+}
+
+html.hems-dark .hems-line-icon.is-orange {
+  --hems-icon-primary: var(--dt-accent-amber);
+  --hems-icon-accent: #FFD166;
+  --hems-icon-bg: rgba(245,158,11,0.1);
+}
+
+html.hems-dark .hems-line-icon.is-purple {
+  --hems-icon-primary: var(--dt-accent-purple);
+  --hems-icon-accent: #C4B5FD;
+  --hems-icon-bg: rgba(139,92,246,0.1);
+}
+
+/* ---------- 18. Misc Text Overrides ---------- */
+html.hems-dark #root > div [style*="color: rgb(174, 174, 178)"] {
+  color: var(--dt-text-tertiary) !important;
+}
+
+html.hems-dark #root > div [style*="color: rgb(110, 110, 115)"] {
+  color: var(--dt-text-secondary) !important;
+}
+
+html.hems-dark #root > div [style*="color: rgb(29, 29, 31)"] {
+  color: var(--dt-text-primary) !important;
+}
+
+/* All remaining 9px/10px text */
+html.hems-dark [style*="font-size: 9px"],
+html.hems-dark [style*="font-size:9px"] {
+  font-size: 11px !important;
+}
+
+/* ---------- 19. Theme Toggle Button ---------- */
+.hems-theme-toggle {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--dt-border-default, rgba(148,163,184,0.22));
+  border-radius: 999px;
+  background: rgba(255,255,255,0.94);
+  color: #0a84ff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--dt-font-sans);
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+}
+
+.hems-theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+}
+
+html.hems-dark .hems-theme-toggle {
+  background: var(--dt-bg-secondary);
+  border-color: var(--dt-border-default);
+  color: var(--dt-accent-blue);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+/* ---------- 20. Force mobile dark ---------- */
+html.hems-dark.hems-force-mobile body {
+  background: var(--dt-bg-primary) !important;
+}
